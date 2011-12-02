@@ -1,0 +1,478 @@
+# Danish translation eject.
+# Copyright (C) 2011 eject & nedenstående oversættere.
+# This file is distributed under the same license as the eject package.
+# Joe Hansen <joedalton2@yahoo.dk>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: eject\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-19 22:35+0100\n"
+"PO-Revision-Date: 2011-05-14 01:44+0000\n"
+"Last-Translator: Joe Hansen <joedalton2@yahoo.dk>\n"
+"Language-Team: Danish <debian-l10n-danish@lists.debian.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../eject.c:155
+#, c-format
+msgid ""
+"Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
+"Usage:\n"
+"  eject -h\t\t\t\t-- display command usage and exit\n"
+"  eject -V\t\t\t\t-- display program version and exit\n"
+"  eject [-vnrsfqpm] [<name>]\t\t-- eject device\n"
+"  eject [-vn] -d\t\t\t-- display default device\n"
+"  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or off\n"
+"  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
+"  eject [-vn] -t [<name>]\t\t-- close tray\n"
+"  eject [-vn] -T [<name>]\t\t-- toggle tray\n"
+"  eject [-vn] -i on|off|1|0 [<name>]\t-- toggle manual eject protection on/"
+"off\n"
+"  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+"  eject [-vn] -X [<name>]\t\t-- list CD-ROM available speeds\n"
+"Options:\n"
+"  -v\t-- enable verbose output\n"
+"  -n\t-- don't eject, just show device found\n"
+"  -r\t-- eject CD-ROM\n"
+"  -s\t-- eject SCSI device\n"
+"  -f\t-- eject floppy\n"
+"  -q\t-- eject tape\n"
+"  -p\t-- use /proc/mounts instead of /etc/mtab\n"
+"  -m\t-- do not unmount device even if it is mounted\n"
+msgstr ""
+"Eject version %s af Jeff Tranter (tranter@pobox.com)\n"
+"Brug:\n"
+"  eject -h\t\t\t\t-- vis kommandohjælp og afslut\n"
+"  eject -V\t\t\t\t-- vis programversion og afslut\n"
+"  eject [-vnrsfqpm] [<navn>]\t\t-- skub enhed ud\n"
+"  eject [-vn] -d\t\t\t-- vis standardenhed\n"
+"  eject [-vn] -a on|off|1|0 [<navn>]\t-- slå automatisk udskubning til/fra\n"
+"  eject [-vn] -c <slot> [<navn>]\t-- skift diske på en cd-rom-ændrer\n"
+"  eject [-vn] -t [<navn>]\t\t-- luk bakke\n"
+"  eject [-vn] -T [<navn>]\t\t-- skift bakke\n"
+"  eject [-vn] -i on|off|1|0 [<navn>]\t-- slå manuel udskubningsbeskyttelse "
+"til/fra\n"
+"  eject [-vn] -x <hastighed> [<navn>]\t-- angiv maksimal hastighed for cd-"
+"rom\n"
+"  eject [-vn] -X [<navn>]\t\t-- vis tilgængelige hastigheder for cd-rom\n"
+"Tilvalg:\n"
+"  -v\t-- aktiver uddybende uddata\n"
+"  -n\t-- skub ikke ud, vis bare enhed fundet\n"
+"  -r\t-- skub cd-rom ud\n"
+"  -s\t-- skub SCSI-enhed ud\n"
+"  -f\t-- skub floppy ud\n"
+"  -q\t-- skub bånd ud\n"
+"  -p\t-- brug /proc/mounts i stedet for /etc/mtab\n"
+"  -m\t-- afmonter ikke enhed selv om enheden er monteret\n"
+
+#: ../eject.c:187
+#, c-format
+msgid ""
+"Long options:\n"
+"  -h --help   -v --verbose      -d --default\n"
+"  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+"  -r --cdrom  -s --scsi         -f --floppy     -X --listspeed     -q --"
+"tape\n"
+"  -n --noop   -V --version\n"
+"  -p --proc   -m --no-unmount   -T --traytoggle\n"
+msgstr ""
+"Lange tilvalg:\n"
+"  -h --help   -v --verbose      -d --default\n"
+"  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+"  -r --cdrom  -s --scsi         -f --floppy     -X --listspeed     -q --"
+"bånd\n"
+"  -n --noop   -V --version\n"
+"  -p --proc   -m --no-unmount   -T --traytoggle\n"
+
+#: ../eject.c:206
+#, c-format
+msgid ""
+"Parameter <name> can be a device file or a mount point.\n"
+"If omitted, name defaults to `%s'.\n"
+"By default tries -r, -s, -f, and -q in order until success.\n"
+msgstr ""
+"Parameteren <navn> kan være en enhedsfil eller et monteringspunkt.\n"
+"Hvis det udelades, bliver navnet »%s«.\n"
+"Som standard forsøges -r, -s, -f og -q for at lykkes.\n"
+
+#: ../eject.c:262
+#, c-format
+msgid "%s: invalid argument to --auto/-a option\n"
+msgstr "%s: Ugyldigt argument for tilvalget --auto/-a\n"
+
+#: ../eject.c:274
+#, c-format
+msgid "%s: invalid argument to --changerslot/-c option\n"
+msgstr "%s: Ugyldigt argument for tilvalget --changerslot/-c\n"
+
+#: ../eject.c:286
+#, c-format
+msgid "%s: invalid argument to --cdspeed/-x option\n"
+msgstr "%s: Ugyldigt argument for tilvalget --cdspeed/-x\n"
+
+#: ../eject.c:312
+#, c-format
+msgid "%s: invalid argument to -i option\n"
+msgstr "%s: Ugyldigt argument for tilvalget -i\n"
+
+#: ../eject.c:347
+#, c-format
+msgid "eject version %s by Jeff Tranter (tranter@pobox.com)\n"
+msgstr "eject version %s af Jeff Tranter (tranter@pobox.com)\n"
+
+#: ../eject.c:357
+#, c-format
+msgid "%s: too many arguments\n"
+msgstr "%s: For mange argumenter\n"
+
+#: ../eject.c:436 ../eject.c:1092 ../eject.c:1296
+#, c-format
+msgid "%s: could not allocate memory\n"
+msgstr "%s: Kunne ikke tildele hukommelse\n"
+
+#: ../eject.c:441
+#, c-format
+msgid "%s: FindDevice called too often\n"
+msgstr "%s: FindDevice kaldt for ofte\n"
+
+#: ../eject.c:553
+#, c-format
+msgid "%s: CD-ROM auto-eject command failed: %s\n"
+msgstr "%s: Kommandoen automatisk udskubning for cd-rom fejlede: %s\n"
+
+#: ../eject.c:568
+#, c-format
+msgid "%s: CD-ROM select disc command failed: %s\n"
+msgstr "%s: Kommandoen vælg disk for cd-rom fejlede: %s\n"
+
+#: ../eject.c:574
+#, c-format
+msgid "%s: CD-ROM load from slot command failed: %s\n"
+msgstr "%s: Kommandoen indlæs fra plads for cd-rom fejlede: %s\n"
+
+#: ../eject.c:578
+#, c-format
+msgid "%s: IDE/ATAPI CD-ROM changer not supported by this kernel\n"
+msgstr "%s: IDE/ATAPI cd-rom-ændrer er ikke understøttet af denne kerne\n"
+
+#: ../eject.c:597
+#, c-format
+msgid "%s: CD-ROM tray close command failed: %s\n"
+msgstr "%s: Kommandoen luk bakken for cd-rom fejlede: %s\n"
+
+#: ../eject.c:601
+#, c-format
+msgid "%s: CD-ROM tray close command not supported by this kernel\n"
+msgstr ""
+"%s: Kommandoen luk bakken for cd-rom er ikke understøttet af denne kerne\n"
+
+#: ../eject.c:649
+#, c-format
+msgid "%s: CD-ROM tray toggle command not supported by this kernel\n"
+msgstr ""
+"%s: Kommandoen skift bakke for cd-rom er ikke understøttet af denne kerne\n"
+
+#: ../eject.c:716
+#, c-format
+msgid "%s: CD-ROM select speed command failed: %s\n"
+msgstr "%s: Kommandoen vælg hastighed for cd-rom fejlede: %s\n"
+
+#: ../eject.c:721 ../eject.c:833
+#, c-format
+msgid "%s: CD-ROM select speed command not supported by this kernel\n"
+msgstr ""
+"%s: Kommandoen vælg hastighed for cd-rom er ikke understøttet af denne "
+"kerne\n"
+
+#: ../eject.c:740
+#, c-format
+msgid "%s: unable to read the speed from /proc/sys/dev/cdrom/info\n"
+msgstr "%s: Kan ikke læse hastigheden fra /proc/sys/dev/cdrom/info\n"
+
+#: ../eject.c:755
+#, c-format
+msgid "%s: error while allocating string\n"
+msgstr "%s: Fejl under allokering af streng\n"
+
+#: ../eject.c:761 ../eject.c:1398
+#, c-format
+msgid "%s: `%s' is a link to `%s'\n"
+msgstr "%s: »%s« er en henvising til »%s«\n"
+
+#: ../eject.c:773
+#, c-format
+msgid "%s: error while finding CD-ROM name\n"
+msgstr "%s: Kunne ikke finde cd-rom-navn (fejl opstod)\n"
+
+#: ../eject.c:786 ../eject.c:794
+#, c-format
+msgid "%s: error while reading speed\n"
+msgstr "%s: Fejl under læsning af hastighed\n"
+
+#: ../eject.c:811
+#, c-format
+msgid "%s: saving original speed %d\n"
+msgstr "%s: Gemmer oprindelig hastighed %d\n"
+
+#: ../eject.c:827
+#, c-format
+msgid "%s: Could not restore original CD-ROM speed (was %d, is now %d)\n"
+msgstr ""
+"%s: Kunne ikke gendanne oprindelig hastighed for cd-rom (var %d, er nu %d)\n"
+
+#: ../eject.c:831
+#, c-format
+msgid "%s: restored original speed %d\n"
+msgstr "%s: Gendannede oprindelig hastighed %d\n"
+
+#: ../eject.c:953
+#, c-format
+msgid "%s: unable to exec umount of `%s': %s\n"
+msgstr "%s: Kunne ikke køre afmontering af »%s«: %s\n"
+
+#: ../eject.c:958
+#, c-format
+msgid "%s: unable to fork: %s\n"
+msgstr "%s: Kunne ikke forgrene: %s\n"
+
+#: ../eject.c:963
+#, c-format
+msgid "%s: unmount of `%s' did not exit normally\n"
+msgstr "%s: Afmontering af »%s« afsluttedes ikke som normalt\n"
+
+#: ../eject.c:967
+#, c-format
+msgid "%s: unmount of `%s' failed\n"
+msgstr "%s: Afmontering af »%s« fejlede\n"
+
+#: ../eject.c:992
+#, c-format
+msgid "%s: unable to open `%s'\n"
+msgstr "%s: Kan ikke åbne »%s«\n"
+
+#: ../eject.c:1038 ../eject.c:1193
+#, c-format
+msgid "unable to open %s: %s\n"
+msgstr "Kan ikke åbne %s: %s\n"
+
+#: ../eject.c:1081
+#, c-format
+msgid "%s: unable to open /etc/fstab: %s\n"
+msgstr "%s: Kan ikke åbne /etc/fstab: %s\n"
+
+#: ../eject.c:1155
+#, c-format
+msgid "%s: %s doesn't exist, skipping call\n"
+msgstr "%s: %s findes ikke, springer kald over\n"
+
+#: ../eject.c:1204 ../eject.c:1277
+#, c-format
+msgid "%s: %s is encrypted on real device %s\n"
+msgstr "%s: %s er krypteret på reel enhed %s\n"
+
+#: ../eject.c:1213
+#, c-format
+msgid "%s: unmounting `%s'\n"
+msgstr "%s: Afmonterer »%s«\n"
+
+#: ../eject.c:1303
+#, c-format
+msgid "%s: `%s' is a multipartition device\n"
+msgstr "%s: »%s« er en flerpartitionsenhed\n"
+
+#: ../eject.c:1308
+#, c-format
+msgid "%s: `%s' is not a multipartition device\n"
+msgstr "%s: »%s« er ikke en flerpartitionsenhed\n"
+
+#: ../eject.c:1321
+#, c-format
+msgid "%s: setting CD-ROM speed to auto\n"
+msgstr "%s: Angiver cd-rom-hastighed til automatisk\n"
+
+#: ../eject.c:1323
+#, c-format
+msgid "%s: setting CD-ROM speed to %dX\n"
+msgstr "%s: Angiver cd-rom-hastighed til %dX\n"
+
+#: ../eject.c:1361
+#, c-format
+msgid "%s: default device: `%s'\n"
+msgstr "%s: Standardenhed: »%s«\n"
+
+#: ../eject.c:1369
+#, c-format
+msgid "%s: using default device `%s'\n"
+msgstr "%s: Bruger standardenhed »%s«\n"
+
+#: ../eject.c:1378
+#, c-format
+msgid "%s: device name is `%s'\n"
+msgstr "%s: Enhedsnavn er »%s«\n"
+
+#: ../eject.c:1384
+#, c-format
+msgid "%s: unable to find or open device for: `%s'\n"
+msgstr "%s: Kan ikke finde eller åbne enhed for: »%s«\n"
+
+#: ../eject.c:1389
+#, c-format
+msgid "%s: expanded name is `%s'\n"
+msgstr "%s: Udvidet navn er »%s«\n"
+
+#: ../eject.c:1409
+#, c-format
+msgid "%s: maximum symbolic link depth exceeded: `%s'\n"
+msgstr "%s: Maksimal dybde på symbolsk henvisning overtrådt: »%s«\n"
+
+#: ../eject.c:1417
+#, c-format
+msgid "%s: `%s' is mounted at `%s'\n"
+msgstr "%s: »%s« er monteret på »%s«\n"
+
+#: ../eject.c:1420
+#, c-format
+msgid "%s: `%s' is not mounted\n"
+msgstr "%s: »%s« er ikke monteret\n"
+
+#: ../eject.c:1432
+#, c-format
+msgid "%s: `%s' can be mounted at `%s'\n"
+msgstr "%s: »%s« kan ikke monteres på »%s«\n"
+
+#: ../eject.c:1434
+#, c-format
+msgid "%s: `%s' is not a mount point\n"
+msgstr "%s: »%s« er ikke et monteringspunkt\n"
+
+#: ../eject.c:1441
+#, c-format
+msgid "%s: tried to use `%s' as device name but it is no block device\n"
+msgstr ""
+"%s: Forsøgte at bruge »%s« som enhedsnavn men det er ikke en blokenhed\n"
+
+#: ../eject.c:1449
+#, c-format
+msgid "%s: device is `%s'\n"
+msgstr "%s: Enhed er »%s«\n"
+
+#: ../eject.c:1451
+#, c-format
+msgid "%s: exiting due to -n/--noop option\n"
+msgstr "%s: Afslutter på grund af tilvalget -n/--noop\n"
+
+#: ../eject.c:1466
+#, c-format
+msgid "%s: enabling auto-eject mode for `%s'\n"
+msgstr "%s: Aktiverer automatisk udskubningstilstand for »%s«\n"
+
+#: ../eject.c:1468
+#, c-format
+msgid "%s: disabling auto-eject mode for `%s'\n"
+msgstr "%s: Deaktiverer automatisk udskubningstilstand for »%s«\n"
+
+#: ../eject.c:1478
+#, c-format
+msgid "%s: closing tray\n"
+msgstr "%s: Lukker bakke\n"
+
+#: ../eject.c:1488
+#, c-format
+msgid "%s: listing CD-ROM speed\n"
+msgstr "%s: Viser cd-rom-hastighed\n"
+
+#: ../eject.c:1500
+#, c-format
+msgid "%s: unmounting device `%s' from `%s'\n"
+msgstr "%s: Afmonterer enhed »%s« fra »%s«\n"
+
+#: ../eject.c:1513
+#, c-format
+msgid "%s: toggling tray\n"
+msgstr "%s: Skifter bakke\n"
+
+#: ../eject.c:1523
+#, c-format
+msgid "%s: selecting CD-ROM disc #%d\n"
+msgstr "%s: Vælger cd-rom-disk #%d\n"
+
+#: ../eject.c:1541
+#, c-format
+msgid "%s: trying to eject `%s' using CD-ROM eject command\n"
+msgstr ""
+"%s: Forsøger at skubbe »%s« ud ved at bruge cd-rom-kommandoen skub ud\n"
+
+#: ../eject.c:1545
+#, c-format
+msgid "%s: CD-ROM eject command succeeded\n"
+msgstr "%s: Udførte cd-rom-kommandoen skub ud\n"
+
+#: ../eject.c:1547
+#, c-format
+msgid "%s: CD-ROM eject command failed\n"
+msgstr "%s: Cd-rom-kommandoen skub ud fejlede\n"
+
+#: ../eject.c:1554
+#, c-format
+msgid "%s: trying to eject `%s' using SCSI commands\n"
+msgstr "%s: Forsøger at skubbe »%s« ud ved at bruge SCSI-kommandoer\n"
+
+#: ../eject.c:1558
+#, c-format
+msgid "%s: SCSI eject succeeded\n"
+msgstr "%s: Udført SCSI skub ud\n"
+
+#: ../eject.c:1560
+#, c-format
+msgid "%s: SCSI eject failed\n"
+msgstr "%s: SCSI skub ud fejlede\n"
+
+#: ../eject.c:1568
+#, c-format
+msgid "%s: trying to eject `%s' using floppy eject command\n"
+msgstr ""
+"%s: Forsøger at skubbe »%s« ud ved at bruge kommandoen floppy skub ud\n"
+
+#: ../eject.c:1572
+#, c-format
+msgid "%s: floppy eject command succeeded\n"
+msgstr "%s: Udførte floppy skub ud\n"
+
+#: ../eject.c:1574
+#, c-format
+msgid "%s: floppy eject command failed\n"
+msgstr "%s: Kommandoen floppy skub ud fejlede\n"
+
+#: ../eject.c:1582
+#, c-format
+msgid "%s: trying to eject `%s' using tape offline command\n"
+msgstr ""
+"%s: Forsøger at skubbe »%s« ud ved at bruge kommandoen bånd frakoblet (tape "
+"offline)\n"
+
+#: ../eject.c:1586
+#, c-format
+msgid "%s: tape offline command succeeded\n"
+msgstr "%s: Udførte kommandoen bånd frakoblet (tape offline)\n"
+
+#: ../eject.c:1588
+#, c-format
+msgid "%s: tape offline command failed\n"
+msgstr "%s: Kommandoen bånd frakoblet (tape offline) fejlede\n"
+
+#: ../eject.c:1594
+#, c-format
+msgid "%s: unable to eject, last error: %s\n"
+msgstr "%s: Kunne ikke skubbe ud, sidste fejl: %s\n"
+
+#: ../volname.c:59
+#, c-format
+msgid "usage: volname [<device-file>]\n"
+msgstr "brug: Enhedsnavn [<enhedsfil>]\n"
+
+#: ../volname.c:65 ../volname.c:71 ../volname.c:77
+msgid "volname"
+msgstr "enhedsnavn"

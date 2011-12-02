@@ -6,7 +6,7 @@
  *
  ********************************************************************
  *
- * Copyright (C) 1994-2001 Jeff Tranter (tranter@pobox.com)
+ * Copyright (C) 1994-2005 Jeff Tranter (tranter@pobox.com)
  * Copyright (C) 2004, 2005 Frank Lichtenheld (djpig@debian.org)
  *
  * This program is free software; you can redistribute it and/or modify
@@ -30,6 +30,9 @@
  *
  */
 
+/* for asprintf() */
+#define _GNU_SOURCE
+
 #include "config.h"
 #include "i18n.h"
 
@@ -43,6 +46,8 @@
 #include <string.h>
 #include <fcntl.h>
 #include <limits.h>
+#include <dirent.h>
+#include <sys/sysmacros.h> /* makedev() */
 
 #ifdef GETOPTLONG
 #include <getopt.h>
@@ -57,20 +62,13 @@
 #include <sys/mount.h>
 
 #if defined(__linux__)
-#include <linux/version.h>
-/* handy macro found in 2.1 kernels, but not in older ones */
-#ifndef KERNEL_VERSION
-#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + (c))
-#endif 
 #include <linux/types.h>
 #include <linux/cdrom.h>
-#if LINUX_VERSION_CODE < KERNEL_VERSION(2,1,0)
-#include <linux/ucdrom.h>
-#endif
 #include <linux/fd.h>
 #include <scsi/scsi.h>
 #include <scsi/sg.h>
 #include <scsi/scsi_ioctl.h>
+#include <scsi/sg_io_linux.h>
 #include <sys/time.h>
 
 /* Used by the ToggleTray() function. If ejecting the tray takes this
@@ -514,8 +512,22 @@ static char *FindDevice(const char *name)
  */
 static void ManualEject(int fd, int onOff)
 {
+#if defined(CDROM_LOCKDOOR)
 	if (ioctl(fd, CDROM_LOCKDOOR, onOff) < 0) {
 		perror("ioctl on CDROM_LOCKDOOR");
+#elif defined(CDIOCALLOW) && defined(CDIOCPREVENT)
+	int status;
+	if (onOff) {
+		status = ioctl(fd, CDIOCPREVENT);
+	} else {
+		status = ioctl(fd, CDIOCALLOW);
+	}
+	if (status < 0) {
+		perror("ioctl on CDIOC(PREVENT|ALLOW)");
+#else
+/* FIXME: Allow to build without this functionality */
+# error
+#endif
         } else {
             if (onOff)
 	        printf("CD-Drive may NOT be ejected with device button\n");
@@ -551,16 +563,14 @@ static void AutoEject(int fd, int onOff)
  */
 static void ChangerSelect(int fd, int slot)
 {
-	int status;
-
 #ifdef CDROM_SELECT_DISC
-	status = ioctl(fd, CDROM_SELECT_DISC, slot);
+	int status = ioctl(fd, CDROM_SELECT_DISC, slot);
 	if (status < 0) {
 		fprintf(stderr, _("%s: CD-ROM select disc command failed: %s\n"), programName, strerror(errno));
 		exit(1);
 	}
 #elif defined CDROMLOADFROMSLOT
-	status = ioctl(fd, CDROMLOADFROMSLOT, slot);
+	int status = ioctl(fd, CDROMLOADFROMSLOT, slot);
 	if (status != 0) {
 		fprintf(stderr, _("%s: CD-ROM load from slot command failed: %s\n"), programName, strerror(errno));
 		exit(1);
@@ -576,9 +586,9 @@ static void ChangerSelect(int fd, int slot)
  */
 static void CloseTray(int fd)
 {
+#if defined(CDROMCLOSETRAY) || defined(CDIOCCLOSE)
 	int status;
 
-#if defined(CDROMCLOSETRAY) || defined(CDIOCCLOSE)
 #if defined(CDROMCLOSETRAY)
 	status = ioctl(fd, CDROMCLOSETRAY);
 #elif defined(CDIOCCLOSE)
@@ -605,10 +615,24 @@ static void CloseTray(int fd)
  */
 static void ToggleTray(int fd)
 {
+#ifdef CDROMCLOSETRAY
 	struct timeval time_start, time_stop;
 	int time_elapsed;
+	int status;
 
-#ifdef CDROMCLOSETRAY
+	status = ioctl(fd, CDROM_DRIVE_STATUS);
+
+	if (status == CDS_TRAY_OPEN){
+		CloseTray(fd);
+		return;
+	}
+	else if (status == CDS_NO_DISC || status == CDS_DISC_OK){
+		if (ioctl(fd, CDROMEJECT, 0) < 0) {
+			perror("ioctl");
+			exit(1);
+		}
+		return;
+	}
 
 	/* Try to open the CDROM tray and measure the time needed.
 	 * In my experience the function needs less than 0.05
@@ -618,7 +642,7 @@ static void ToggleTray(int fd)
 	gettimeofday(&time_start, NULL);
 	
 	/* Send the CDROMEJECT command to the device. */
-	if (ioctl(fd, CDROMEJECT, 0) < 0) {
+	if (ioctl(fd, CDROMEJECT, 0) < 0 && errno != EIO) {
 		perror("ioctl");
 		exit(1);
 	}
@@ -649,12 +673,12 @@ static void ToggleTray(int fd)
  */
 static void SelectSpeedCdrom(int fd, int speed)
 {
+#if defined(CDROM_SELECT_SPEED) && defined(CDROM_SEND_PACKET)
         unsigned long rw_size;
         unsigned char buffer[28];
         struct cdrom_generic_command cgc;
         struct request_sense sense;
 
-#ifdef CDROM_SELECT_SPEED
         memset(&cgc, 0, sizeof(cgc));
         memset(&sense, 0, sizeof(sense));
         memset(&buffer, 0, sizeof(buffer));
@@ -713,13 +737,17 @@ static void SelectSpeedCdrom(int fd, int speed)
 #endif
 }
 
+static char *SymLink(const char *name);
+
 /*
  * Read Speed of CD-ROM drive. From Linux 2.6.13, the current speed is correctly reported
  */
+#ifdef CDROM_SELECT_SPEED
 static int ReadSpeedCdrom(const char *shortName)
 {
 	char line[512];
 	char *str_speed, *str_name;
+	int ld = 6; /* max symbolic link depth */
 	int drive_number = -1, i;
 	FILE *f = fopen("/proc/sys/dev/cdrom/info", "r");
 	
@@ -735,6 +763,23 @@ static int ReadSpeedCdrom(const char *shortName)
 		if (drive_number == -1) {
 			if (strncmp(line, "drive name:", 11) == 0) {
 				str_name = strtok(&line[11], "\t ");
+				/* str_name may contain a symlink */
+				char *full_str_name, *dev_name;
+				int ret = asprintf(&full_str_name, "/dev/%s", str_name);
+				if (ret == -1) {
+					fprintf(stderr, _("%s: error while allocating string\n"), programName);
+					exit(1);
+				}
+				full_str_name[strlen(full_str_name)-1] = '\0'; /* chop trailing \n */
+				while ((dev_name = SymLink(full_str_name)) && ld > 0) {
+				  if (v_option)
+				    printf(_("%s: `%s' is a link to `%s'\n"), programName, full_str_name, dev_name);
+				  free(full_str_name);
+				  full_str_name = strdup(dev_name);
+				  free(dev_name);
+				  ld--;
+				}
+				str_name = rindex(full_str_name, '/') + 1;
 				drive_number = 0;
 				while (strncmp(shortName, str_name, strlen(shortName)) != 0) {
 					drive_number++;
@@ -765,7 +810,7 @@ static int ReadSpeedCdrom(const char *shortName)
 	exit(1);
 	return -1;
 }
-
+#endif
 
 /*
  * List Speed of CD-ROM drive.
@@ -773,9 +818,12 @@ static int ReadSpeedCdrom(const char *shortName)
 static void ListSpeedCdrom(const char *fullName, int fd)
 {
 #ifdef CDROM_SELECT_SPEED
-	int max_speed, curr_speed = 0, prev_speed;
+	int max_speed, curr_speed = 0, prev_speed, save_speed;
 	char *shortName = rindex(fullName, '/') + 1;
-	
+
+	save_speed = ReadSpeedCdrom(shortName);
+	if (v_option)
+		printf(_("%s: saving original speed %d\n"), programName, save_speed);
 	SelectSpeedCdrom(fd, 0);
 	max_speed = ReadSpeedCdrom(shortName);
 	while (curr_speed < max_speed) {
@@ -787,8 +835,15 @@ static void ListSpeedCdrom(const char *fullName, int fd)
 		else
 			curr_speed = prev_speed + 1;
 	}
-
 	printf("\n");
+	SelectSpeedCdrom(fd, save_speed);
+	curr_speed = ReadSpeedCdrom(shortName);
+	if (curr_speed != save_speed)
+		fprintf(stderr, _("%s: Could not restore original CD-ROM speed (was %d, is now %d)\n"),
+				programName, save_speed, curr_speed);
+	else
+		if (v_option)
+			printf(_("%s: restored original speed %d\n"), programName, save_speed);
 #else
 	fprintf(stderr, _("%s: CD-ROM select speed command not supported by this kernel\n"), programName);
 #endif
@@ -844,17 +899,17 @@ static int EjectScsi(int fd)
 
 	io_hdr.cmdp = allowRmBlk;
 	status = ioctl(fd, SG_IO, (void *)&io_hdr);
-	if (status < 0)
+	if (status < 0 || io_hdr.host_status != DID_OK || io_hdr.driver_status != DRIVER_OK)
 		return 0;
 
 	io_hdr.cmdp = startStop1Blk;
 	status = ioctl(fd, SG_IO, (void *)&io_hdr);
-	if (status < 0)
+	if (status < 0 || io_hdr.host_status != DID_OK || io_hdr.driver_status != DRIVER_OK)
 		return 0;
 
 	io_hdr.cmdp = startStop2Blk;
 	status = ioctl(fd, SG_IO, (void *)&io_hdr);
-	if (status < 0)
+	if (status < 0 || io_hdr.host_status != DID_OK || io_hdr.driver_status != DRIVER_OK)
 		return 0;
 
 	/* force kernel to reread partition table when new disc inserted */
@@ -937,9 +992,14 @@ static int OpenDevice(const char *fullName)
 {
 	int fd;
 
-	fd = open(fullName, O_RDWR|O_NONBLOCK);
-	if (fd != -1) {
-		return fd;
+	/* only try to open read/write if not root, since it doesn't seem
+	 * to make a difference for root and can have negative side-effects
+	 */
+	if (geteuid()) {
+		fd = open(fullName, O_RDWR|O_NONBLOCK);
+		if (fd != -1) {
+			return fd;
+		}
 	}
 
 	fd = open(fullName, O_RDONLY|O_NONBLOCK);
@@ -1042,7 +1102,11 @@ static int MountableDevice(const char *name, char **mountName, char **deviceName
 		rc = sscanf(line, "%1023s %1023s", s1, s2);
 		if (rc >= 2 && s1[0] != '#' && strcmp(s2, name) == 0) {
 			if (strncasecmp(s1, "UUID=", 5) == 0) {
-				char *realDeviceName = malloc(strlen(s1) + 32);
+				char *realDeviceName = (char *) malloc(strlen(s1) + 32);
+				if (realDeviceName == NULL) {
+					fprintf(stderr, _("%s: could not allocate memory\n"), programName);
+					exit(1);
+				}
 				sprintf(realDeviceName, "/dev/disk/by-uuid/%s", s1 + 5);
 				strncpy(s1, realDeviceName, sizeof(s2)-1);
 			}
@@ -1056,6 +1120,68 @@ static int MountableDevice(const char *name, char **mountName, char **deviceName
 	return 0;
 }
 
+/*
+ * Find device name with the given major and minor number. Returns NULL if not
+ * found. The returned pointer points to static area and must not be free()'d.
+ */
+char* FindDeviceMajorMinor(int major, int minor)
+{
+    DIR* d = opendir("/dev");
+    struct dirent *entry;
+    struct stat st;
+    dev_t dev = makedev(major, minor);
+    static char path[270];
+
+    if (!d)
+        return NULL;
+    while ((entry = readdir(d)) != 0) {
+        snprintf(path, sizeof(path), "/dev/%s", entry->d_name);
+        if (stat(path, &st) != 0)
+            continue;
+        if (S_ISBLK (st.st_mode) && st.st_rdev == dev)
+            return path;
+    }
+    return NULL;
+}
+
+/*
+ * Check whether dev is an encrypted device handled by devmapper. If so, return
+ * the underlying physical device name (pointer to static area, do not free()).
+ * If not, or an error occurs, return NULL.
+ * This uses the /usr/lib/eject/dmcrypt-get-device helper.
+ */
+const char* dmcrypt_script = "/usr/lib/eject/dmcrypt-get-device";
+const char* GetDevmapperDevice (const char* dev)
+{
+    char cmd[1024];
+    char output[100];
+    int major, minor;
+    struct stat dummy;
+
+    const char* devmapper = "/dev/mapper/";
+    if (strncmp (dev, devmapper, strlen(devmapper)))
+        return NULL;
+
+    if (strchr (dev, '\''))
+        return NULL;
+    if ((stat(dmcrypt_script, &dummy) < 0)
+	&& (errno == ENOENT)) {
+      if (v_option)
+	printf(_("%s: %s doesn't exist, skipping call\n"),
+	       programName, dmcrypt_script);
+      return NULL;
+    }
+    snprintf (cmd, sizeof(cmd), "%s '%s'", dmcrypt_script, dev);
+    FILE* f = popen (cmd, "r");
+    fread (output, 1, sizeof(output), f);
+    if (pclose(f))
+        return NULL;
+
+    if (sscanf(output, "%i:%i", &major, &minor) == 2)
+        return FindDeviceMajorMinor (major, minor);
+    else
+        return NULL;
+}
 
 /*
  * Step through mount table and unmount all devices that match a regular
@@ -1067,6 +1193,7 @@ static void UnmountDevices(const char *pattern)
 	FILE *fp;
 	char s1[1024];
 	char s2[1024];
+	char *mountParam;
 	char line[1024];
 	int status;
 
@@ -1085,11 +1212,21 @@ static void UnmountDevices(const char *pattern)
 	while (fgets(line, sizeof(line), fp) != 0) {
 		status = sscanf(line, "%1023s %1023s", s1, s2);
 		if (status >= 2) {
-			status = regexec(&preg, s1, 0, 0, 0);
+                        /* Check if we have a mapped device */
+                        const char* dev = GetDevmapperDevice (s1);
+                        if (dev) {
+                            if (v_option)
+                                printf(_("%s: %s is encrypted on real device %s\n"),
+                                        programName, s1, dev);
+                        } else
+                            dev = s1;
+
+			status = regexec(&preg, dev, 0, 0, 0);
 			if (status == 0) {
+				mountParam = DeMangleMount(s2);
 				if (v_option)
-					printf(_("%s: unmounting `%s'\n"), programName, s2);
-				Unmount(s2);
+					printf(_("%s: unmounting `%s'\n"), programName, mountParam);
+				Unmount(mountParam);
 			}
 		}
 	}
@@ -1146,6 +1283,15 @@ static char *MultiplePartitions(const char *name)
 	regex_t preg;
 	char pattern[256];
 	char *result = 0;
+
+        /* Check if we have a mapped device */
+        const char* dev = GetDevmapperDevice (name);
+        if (dev) {
+            if (v_option)
+                printf(_("%s: %s is encrypted on real device %s\n"),
+                        programName, name, dev);
+            name = dev;
+        }
 
 	for (i = 0; partitionDevice[i] != 0; i++) {
 		/* look for ^/dev/foo[a-z]([0-9]?[0-9])?$, e.g. /dev/hda1 */

@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eject 2.1.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-04-09 20:13+0300\n"
-"PO-Revision-Date: 2005-11-19 24:30+0000\n"
-"Last-Translator: Bahadır Kandemir <bahadir@pardus.org.tr>\n"
+"POT-Creation-Date: 2008-11-04 23:19+0100\n"
+"PO-Revision-Date: 2008-05-22 17:40+0200\n"
+"Last-Translator: Mert Dirik <mertdirik@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: eject.c:156
+#: ../eject.c:155
+#, fuzzy, c-format
 msgid ""
 "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 "Usage:\n"
@@ -27,6 +28,8 @@ msgid ""
 "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
 "  eject [-vn] -t [<name>]\t\t-- close tray\n"
 "  eject [-vn] -T [<name>]\t\t-- toggle tray\n"
+"  eject [-vn] -i on|off|1|0 [<name>]\t-- toggle manual eject protection on/"
+"off\n"
 "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
 "  eject [-vn] -X [<name>]\t\t-- list CD-ROM available speeds\n"
 "Options:\n"
@@ -45,8 +48,10 @@ msgstr ""
 "  eject -V\t\t\t\t-- program sürümünü göster ve çık\n"
 "  eject [-vnrsfqpm] [<name>]\t\t-- kaynağı çıkar\n"
 "  eject [-vn] -d\t\t\t-- öntanımlı kaynağı göster\n"
-"  eject [-vn] -a on|off|1|0 [<name>]\t-- otomatik çıkar seçeneğini aç ya da kapat\n"
-"  eject [-vn] -c <slot> [<name>]\t-- Bir CD-ROM değiştirici üzerindeki diskleri seç\n"
+"  eject [-vn] -a on|off|1|0 [<name>]\t-- otomatik çıkar seçeneğini aç ya da "
+"kapat\n"
+"  eject [-vn] -c <slot> [<name>]\t-- Bir CD-ROM değiştirici üzerindeki "
+"diskleri seç\n"
 "  eject [-vn] -t [<name>]\t\t-- Görev çubuğunu kapat\n"
 "  eject [-vn] -T [<name>]\t\t-- Görev çubuğunu durumunu değiştir\n"
 "  eject [-vn] -x <speed> [<name>]\t-- CD-ROM en yüksek hızını ayarla\n"
@@ -61,7 +66,8 @@ msgstr ""
 "  -p\t-- /etc/mtab yerine /proc/mounts kullan\n"
 "  -m\t-- Aygıtı bağlıysa bile ayırma\n"
 
-#: eject.c:187
+#: ../eject.c:187
+#, c-format
 msgid ""
 "Long options:\n"
 "  -h --help   -v --verbose      -d --default\n"
@@ -79,7 +85,7 @@ msgstr ""
 "  -n --noop   -V --version\n"
 "  -p --proc   -m --no-unmount   -T --traytoggle\n"
 
-#: eject.c:206
+#: ../eject.c:206
 #, c-format
 msgid ""
 "Parameter <name> can be a device file or a mount point.\n"
@@ -90,336 +96,443 @@ msgstr ""
 "Bu parametre boş bırakıldığında öntanımlı olan aygıt `%s' kullanılır.\n"
 "Başarılı olana kadar -r, -s, -f ve -q parametreleri denenir.\n"
 
-#: eject.c:261
+#: ../eject.c:262
 #, c-format
 msgid "%s: invalid argument to --auto/-a option\n"
 msgstr "%s: --auto/-a seçeneği için geçersiz argüman.\n"
 
-#: eject.c:273
+#: ../eject.c:274
 #, c-format
 msgid "%s: invalid argument to --changerslot/-c option\n"
 msgstr "%s: --changerslot/-c seçeneği için geçersiz argüman.\n"
 
-#: eject.c:285
+#: ../eject.c:286
 #, c-format
 msgid "%s: invalid argument to --cdspeed/-x option\n"
 msgstr "%s: --cdspeed/-x seçeneği için geçersiz argüman.\n"
 
-#: eject.c:331
+#: ../eject.c:312
+#, fuzzy, c-format
+msgid "%s: invalid argument to -i option\n"
+msgstr "%s: --auto/-a seçeneği için geçersiz argüman.\n"
+
+#: ../eject.c:347
 #, c-format
 msgid "eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 msgstr "eject sürüm %s Jeff Tranter (tranter@pobox.com)\n"
 
-#: eject.c:341
+#: ../eject.c:357
 #, c-format
 msgid "%s: too many arguments\n"
 msgstr "%s: çok fazla argüman\n"
 
-#: eject.c:396 eject.c:1037
+#: ../eject.c:436 ../eject.c:1064 ../eject.c:1268
 #, c-format
 msgid "%s: could not allocate memory\n"
 msgstr "%s: bellek konumlandırılamadı.\n"
 
-#: eject.c:401
+#: ../eject.c:441
 #, c-format
 msgid "%s: FindDevice called too often\n"
 msgstr "%s: FindDevice çok fazla kullanıldı\n"
 
-#: eject.c:475
+#: ../eject.c:539
 #, c-format
 msgid "%s: CD-ROM auto-eject command failed: %s\n"
 msgstr "%s: CD-ROM otomatik çıkar komutu başarısız oldu: %s\n"
 
-#: eject.c:492
+#: ../eject.c:556
 #, c-format
 msgid "%s: CD-ROM select disc command failed: %s\n"
 msgstr "%s: CD-ROM disk seç komutu başarısız oldu: %s\n"
 
-#: eject.c:498
+#: ../eject.c:562
 #, c-format
 msgid "%s: CD-ROM load from slot command failed: %s\n"
 msgstr "%s: CD-ROM slottan yükle komutu başarısız oldu: %s\n"
 
-#: eject.c:502
+#: ../eject.c:566
 #, c-format
 msgid "%s: IDE/ATAPI CD-ROM changer not supported by this kernel\n"
-msgstr "%s: IDE/ATAPI CD-ROM değiştirici bu çekirdek (kernel) tarafından desteklenmiyor.\n"
+msgstr ""
+"%s: IDE/ATAPI CD-ROM değiştirici bu çekirdek (kernel) tarafından "
+"desteklenmiyor.\n"
 
-#: eject.c:521
+#: ../eject.c:585
 #, c-format
 msgid "%s: CD-ROM tray close command failed: %s\n"
 msgstr "%s: CD-ROM görev çubuğunu kapat komutu başarısız oldu: %s\n"
 
-#: eject.c:525
+#: ../eject.c:589
 #, c-format
 msgid "%s: CD-ROM tray close command not supported by this kernel\n"
-msgstr "%s: CD-ROM görev çubuğunu kapat komutu bu çekirdek (kernel) tarafından desteklenmiyor.\n"
+msgstr ""
+"%s: CD-ROM görev çubuğunu kapat komutu bu çekirdek (kernel) tarafından "
+"desteklenmiyor.\n"
 
-#: eject.c:572
+#: ../eject.c:637
 #, c-format
 msgid "%s: CD-ROM tray toggle command not supported by this kernel\n"
-msgstr "%s: CD-ROM görev çubuğu durum değiştir komutu bu çekirdek (kernel) tarafından desteklenmiyor.\n"
+msgstr ""
+"%s: CD-ROM görev çubuğu durum değiştir komutu bu çekirdek (kernel) "
+"tarafından desteklenmiyor.\n"
 
-#: eject.c:589
+#: ../eject.c:704
 #, c-format
 msgid "%s: CD-ROM select speed command failed: %s\n"
 msgstr "%s: CD-ROM hızı seç komutu başarısız oldu: %s\n"
 
-#: eject.c:593 eject.c:674
+#: ../eject.c:709 ../eject.c:810
 #, c-format
 msgid "%s: CD-ROM select speed command not supported by this kernel\n"
-msgstr "%s: CD-ROM hızu seç komutu bu çekirdek (kernel) tarafından desteklenmiyor.\n"
+msgstr ""
+"%s: CD-ROM hızu seç komutu bu çekirdek (kernel) tarafından desteklenmiyor.\n"
 
-#: eject.c:608
+#: ../eject.c:727
 #, c-format
 msgid "%s: unable to read the speed from /proc/sys/dev/cdrom/info\n"
 msgstr "%s: hız, /proc/sys/dev/cdrom/info'dan okunamadı\n"
 
-#: eject.c:624
-#, c-format
-msgid "%s: error while finding CD-ROM name\n"
-msgstr "%s: CD-ROM ismi bulunamadı\n"
-
-#: eject.c:637 eject.c:645
-#, c-format
-msgid "%s: error while reading speed\n"
+#: ../eject.c:742
+#, fuzzy, c-format
+msgid "%s: error while allocating string\n"
 msgstr "%s: hız okunamadı\n"
 
-#: eject.c:794
-msgid "%s: unable to exec umount of `%s': %s\n"
-msgstr "%s: `%s' sistemden ayrılamadı: %s\n"
-
-#: eject.c:799
-#, c-format
-msgid "%s: unable to fork: %s\n"
-msgstr "%s: çatallama yapılamadı: %s\n"
-
-#: eject.c:804
-#, c-format
-msgid "%s: unmount of `%s' did not exit normally\n"
-msgstr "%s: `%s' ayırma işlemi normal sonuçlanmadı.\n"
-
-#: eject.c:808
-#, c-format
-msgid "%s: unmount of `%s' failed\n"
-msgstr "%s: `%s' ayırma işlemi başarısız oldu.\n"
-
-#: eject.c:821
-#, c-format
-msgid "%s: unable to open `%s'\n"
-msgstr "%s: `%s' açılamadı\n"
-
-#: eject.c:867 eject.c:954
-#, c-format
-msgid "unable to open %s: %s\n"
-msgstr "%s açılamadı: %s\n"
-
-#: eject.c:914
-#, c-format
-msgid "%s: unable to open /etc/fstab: %s\n"
-msgstr "%s: /etc/fstab açılamadı: %s\n"
-
-#: eject.c:964
-#, c-format
-msgid "%s: unmounting `%s'\n"
-msgstr "%s: `%s' ayrılıyor\n"
-
-#: eject.c:1044
-#, c-format
-msgid "%s: `%s' is a multipartition device\n"
-msgstr "%s: `%s' çok bölümlü bir aygıt\n"
-
-#: eject.c:1049
-#, c-format
-msgid "%s: `%s' is not a multipartition device\n"
-msgstr "%s: `%s' çok bölümlü bir aygıt değil\n"
-
-#: eject.c:1062
-#, c-format
-msgid "%s: setting CD-ROM speed to auto\n"
-msgstr "%s: CD-ROM hızı otomatik olarak ayarlanıyor\n"
-
-#: eject.c:1064
-#, c-format
-msgid "%s: setting CD-ROM speed to %dX\n"
-msgstr "%s: CD-ROM hızı %dX olarak ayarlanıyor\n"
-
-#: eject.c:1102
-#, c-format
-msgid "%s: default device: `%s'\n"
-msgstr "%s: öntanımlı aygıt: `%s'\n"
-
-#: eject.c:1110
-#, c-format
-msgid "%s: using default device `%s'\n"
-msgstr "%s: `%s' öntanımlı aygıt kullanılıyor\n"
-
-#: eject.c:1119
-#, c-format
-msgid "%s: device name is `%s'\n"
-msgstr "%s: aygıt ismi `%s'\n"
-
-#: eject.c:1125
-#, c-format
-msgid "%s: unable to find or open device for: `%s'\n"
-msgstr "%s: `%s' aygıtı bulunamadı ya da açılamadı'\n"
-
-#: eject.c:1130
-#, c-format
-msgid "%s: expanded name is `%s'\n"
-msgstr "%s: ayrıntılı isim `%s'\n"
-
-#: eject.c:1139
+#: ../eject.c:748 ../eject.c:1370
 #, c-format
 msgid "%s: `%s' is a link to `%s'\n"
 msgstr "%s: `%s', `%s' aygıtına bağlı\n"
 
-#: eject.c:1150
+#: ../eject.c:760
+#, c-format
+msgid "%s: error while finding CD-ROM name\n"
+msgstr "%s: CD-ROM ismi bulunamadı\n"
+
+#: ../eject.c:773 ../eject.c:781
+#, c-format
+msgid "%s: error while reading speed\n"
+msgstr "%s: hız okunamadı\n"
+
+#: ../eject.c:930
+#, c-format
+msgid "%s: unable to exec umount of `%s': %s\n"
+msgstr "%s: `%s' sistemden ayrılamadı: %s\n"
+
+#: ../eject.c:935
+#, c-format
+msgid "%s: unable to fork: %s\n"
+msgstr "%s: çatallama yapılamadı: %s\n"
+
+#: ../eject.c:940
+#, c-format
+msgid "%s: unmount of `%s' did not exit normally\n"
+msgstr "%s: `%s' ayırma işlemi normal sonuçlanmadı.\n"
+
+#: ../eject.c:944
+#, c-format
+msgid "%s: unmount of `%s' failed\n"
+msgstr "%s: `%s' ayırma işlemi başarısız oldu.\n"
+
+#: ../eject.c:964
+#, c-format
+msgid "%s: unable to open `%s'\n"
+msgstr "%s: `%s' açılamadı\n"
+
+#: ../eject.c:1010 ../eject.c:1165
+#, c-format
+msgid "unable to open %s: %s\n"
+msgstr "%s açılamadı: %s\n"
+
+#: ../eject.c:1053
+#, c-format
+msgid "%s: unable to open /etc/fstab: %s\n"
+msgstr "%s: /etc/fstab açılamadı: %s\n"
+
+#: ../eject.c:1127
+#, c-format
+msgid "%s: %s doesn't exist, skipping call\n"
+msgstr ""
+
+#: ../eject.c:1176 ../eject.c:1249
+#, c-format
+msgid "%s: %s is encrypted on real device %s\n"
+msgstr "%s: %s, gerçek bir aygıt olan %s'da şifreli\n"
+
+#: ../eject.c:1185
+#, c-format
+msgid "%s: unmounting `%s'\n"
+msgstr "%s: `%s' ayrılıyor\n"
+
+#: ../eject.c:1275
+#, c-format
+msgid "%s: `%s' is a multipartition device\n"
+msgstr "%s: `%s' çok bölümlü bir aygıt\n"
+
+#: ../eject.c:1280
+#, c-format
+msgid "%s: `%s' is not a multipartition device\n"
+msgstr "%s: `%s' çok bölümlü bir aygıt değil\n"
+
+#: ../eject.c:1293
+#, c-format
+msgid "%s: setting CD-ROM speed to auto\n"
+msgstr "%s: CD-ROM hızı otomatik olarak ayarlanıyor\n"
+
+#: ../eject.c:1295
+#, c-format
+msgid "%s: setting CD-ROM speed to %dX\n"
+msgstr "%s: CD-ROM hızı %dX olarak ayarlanıyor\n"
+
+#: ../eject.c:1333
+#, c-format
+msgid "%s: default device: `%s'\n"
+msgstr "%s: öntanımlı aygıt: `%s'\n"
+
+#: ../eject.c:1341
+#, c-format
+msgid "%s: using default device `%s'\n"
+msgstr "%s: `%s' öntanımlı aygıt kullanılıyor\n"
+
+#: ../eject.c:1350
+#, c-format
+msgid "%s: device name is `%s'\n"
+msgstr "%s: aygıt ismi `%s'\n"
+
+#: ../eject.c:1356
+#, c-format
+msgid "%s: unable to find or open device for: `%s'\n"
+msgstr "%s: `%s' aygıtı bulunamadı ya da açılamadı'\n"
+
+#: ../eject.c:1361
+#, c-format
+msgid "%s: expanded name is `%s'\n"
+msgstr "%s: ayrıntılı isim `%s'\n"
+
+#: ../eject.c:1381
 #, c-format
 msgid "%s: maximum symbolic link depth exceeded: `%s'\n"
 msgstr "%s: maksimum sembolik bağlantı derinliği aşıldı: `%s'\n"
 
-#: eject.c:1158
+#: ../eject.c:1389
 #, c-format
 msgid "%s: `%s' is mounted at `%s'\n"
 msgstr "%s: `%s', `%s' adresine bağlı\n"
 
-#: eject.c:1161
+#: ../eject.c:1392
 #, c-format
 msgid "%s: `%s' is not mounted\n"
 msgstr "%s: `%s' aygıtı bağlı değil\n"
 
-#: eject.c:1173
+#: ../eject.c:1404
 #, c-format
 msgid "%s: `%s' can be mounted at `%s'\n"
 msgstr "%s: `%s', `%s' adresine bağlanabilir\n"
 
-#: eject.c:1175
+#: ../eject.c:1406
 #, c-format
 msgid "%s: `%s' is not a mount point\n"
 msgstr "%s: `%s' bir bağlanma noktası değil\n"
 
-#: eject.c:1182
+#: ../eject.c:1413
 #, c-format
 msgid "%s: tried to use `%s' as device name but it is no block device\n"
 msgstr "%s: aygıt ismi olarak `%s' kullanıldı ancak bu bir blok aygıtı değil\n"
 
-#: eject.c:1190
+#: ../eject.c:1421
 #, c-format
 msgid "%s: device is `%s'\n"
 msgstr "%s: aygıt `%s'\n"
 
-#: eject.c:1192
+#: ../eject.c:1423
 #, c-format
 msgid "%s: exiting due to -n/--noop option\n"
 msgstr "%s: -n/--noop seçeneği sebebiyle çıkılıyor\n"
 
-#: eject.c:1200
+#: ../eject.c:1438
 #, c-format
 msgid "%s: enabling auto-eject mode for `%s'\n"
 msgstr "%s: `%s' için otomatik çıkarma modu aktifleştiriliyor\n"
 
-#: eject.c:1202
+#: ../eject.c:1440
 #, c-format
 msgid "%s: disabling auto-eject mode for `%s'\n"
 msgstr "%s: `%s' için otomatik çıkarma modu pasifleştiriliyor\n"
 
-#: eject.c:1212
+#: ../eject.c:1450
 #, c-format
 msgid "%s: closing tray\n"
 msgstr "%s: görev çubuğu kapatılıyor\n"
 
-#: eject.c:1222
-#, c-format
-msgid "%s: toggling tray\n"
-msgstr "%s: görev çubuğu durumu değiştiriliyor\n"
-
-#: eject.c:1232
+#: ../eject.c:1460
 #, c-format
 msgid "%s: listing CD-ROM speed\n"
 msgstr "%s: CD-ROM hızları listeleniyor\n"
 
-#: eject.c:1244
+#: ../eject.c:1472
 #, c-format
 msgid "%s: unmounting device `%s' from `%s'\n"
 msgstr "%s: `%s' aygıtı `%s' adresinden ayrılıyor\n"
 
-#: eject.c:1257
+#: ../eject.c:1485
+#, c-format
+msgid "%s: toggling tray\n"
+msgstr "%s: görev çubuğu durumu değiştiriliyor\n"
+
+#: ../eject.c:1495
 #, c-format
 msgid "%s: selecting CD-ROM disc #%d\n"
 msgstr "%s: CD-ROM diski seçiliyor #%d\n"
 
-#: eject.c:1275
+#: ../eject.c:1513
 #, c-format
 msgid "%s: trying to eject `%s' using CD-ROM eject command\n"
 msgstr "%s: `%s', CD-ROM eject komutu ile çıkarılıyor\n"
 
-#: eject.c:1279
+#: ../eject.c:1517
 #, c-format
 msgid "%s: CD-ROM eject command succeeded\n"
 msgstr "%s: CD-ROM eject komutu başarılı oldu\n"
 
-#: eject.c:1281
+#: ../eject.c:1519
 #, c-format
 msgid "%s: CD-ROM eject command failed\n"
 msgstr "%s: CD-ROM eject komutu başarısız oldu\n"
 
-#: eject.c:1288
+#: ../eject.c:1526
 #, c-format
 msgid "%s: trying to eject `%s' using SCSI commands\n"
 msgstr "%s: `%s', SCSI komutları ile çılarılıyor\n"
 
-#: eject.c:1292
+#: ../eject.c:1530
 #, c-format
 msgid "%s: SCSI eject succeeded\n"
 msgstr "%s: SCSI çıkarma işlemi başarılı oldu\n"
 
-#: eject.c:1294
+#: ../eject.c:1532
 #, c-format
 msgid "%s: SCSI eject failed\n"
 msgstr "%s: SCSI çıkarma işlemi başarısız oldu\n"
 
-#: eject.c:1302
+#: ../eject.c:1540
 #, c-format
 msgid "%s: trying to eject `%s' using floppy eject command\n"
 msgstr "%s: `%s', floppy eject komutu ile çıkarılıyor\n"
 
-#: eject.c:1306
+#: ../eject.c:1544
 #, c-format
 msgid "%s: floppy eject command succeeded\n"
 msgstr "%s: floppy eject komutu başarılı oldu\n"
 
-#: eject.c:1308
+#: ../eject.c:1546
 #, c-format
 msgid "%s: floppy eject command failed\n"
 msgstr "%s: floppy eject komutu başarısız oldu\n"
 
-#: eject.c:1316
+#: ../eject.c:1554
 #, c-format
 msgid "%s: trying to eject `%s' using tape offline command\n"
 msgstr "%s: `%s', tape offline komutu ile çıkarılıyor\n"
 
-#: eject.c:1320
+#: ../eject.c:1558
 #, c-format
 msgid "%s: tape offline command succeeded\n"
 msgstr "%s: tape offline komutu başarılı oldu\n"
 
-#: eject.c:1322
+#: ../eject.c:1560
 #, c-format
 msgid "%s: tape offline command failed\n"
 msgstr "%s: tape offline komutu başarısız oldu\n"
 
-#: eject.c:1328
+#: ../eject.c:1566
 #, c-format
 msgid "%s: unable to eject, last error: %s\n"
 msgstr "%s: çıkarma işlemi başarısız, son hata: %s\n"
 
-#: volname.c:59
+#: ../volname.c:59
 #, c-format
 msgid "usage: volname [<device-file>]\n"
 msgstr "kullanım: volname [<aygıt-dosyası>]\n"
 
-#: volname.c:65 volname.c:71 volname.c:77
+#: ../volname.c:65 ../volname.c:71 ../volname.c:77
 msgid "volname"
 msgstr "DiskAdı"
 
+#, fuzzy
+#~ msgid ""
+#~ "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
+#~ "Usage:\n"
+#~ "  eject -h\t\t\t\t-- display command usage and exit\n"
+#~ "  eject -V\t\t\t\t-- display program version and exit\n"
+#~ "  eject [-vnrsfq] [<name>]\t\t-- eject device\n"
+#~ "  eject [-vn] -d\t\t\t-- display default device\n"
+#~ "  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or "
+#~ "off\n"
+#~ "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
+#~ "  eject [-vn] -t [<name>]\t\t-- close tray\n"
+#~ "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+#~ "Options:\n"
+#~ "  -v\t-- enable verbose output\n"
+#~ "  -n\t-- don't eject, just show device found\n"
+#~ "  -r\t-- eject CD-ROM\n"
+#~ "  -s\t-- eject SCSI device\n"
+#~ "  -f\t-- eject floppy\n"
+#~ "  -q\t-- eject tape\n"
+#~ "  -p\t-- use /proc/mounts instead of /etc/mtab\n"
+#~ "  -m\t-- do not unmount device even if it is mounted\n"
+#~ msgstr ""
+#~ "Eject sürüm %s Jeff Tranter (tranter@pobox.com)\n"
+#~ "Kullanım:\n"
+#~ "  eject -h \t\t\t\t-- komut kullanımını göster ve çık\n"
+#~ "  eject -V \t\t\t\t-- program sürümünü göster ve çık\n"
+#~ "  eject [-vnrsfq] [<name>]\t\t-- kaynağı çıkar\n"
+#~ "  eject [-vn] -d\t\t\t-- öntanımlı kaynağı göster\n"
+#~ "  eject [-vn] -a aç|kapat|1|0 [<name>]\t-- otomatik çıkar seçeneğini aç "
+#~ "ya da kapat\n"
+#~ "  eject [-vn] -c <slot> [<name>]\t-- Bir CD-ROM değiştirici üzerindeki "
+#~ "diskleri seç\n"
+#~ "  eject [-vn] -t [<name>]\t\t-- Görev çubuğunu kapat\n"
+#~ "  eject [-vn] -x <speed> [<name>]\t-- CD-ROM en yüksek hızını ayarla\n"
+#~ "Seçenekler:\n"
+#~ "  -v\t-- Bilgilendirici çıktıyı göster\n"
+#~ "  -n\t-- Çıkarma sadece bulunan aygıtı göster\n"
+#~ "  -r\t-- CD-ROM'u çıkar\n"
+#~ "  -s\t-- SCSI aygıtı çıkar \n"
+#~ "  -f\t-- Disketi çıkar\n"
+#~ "  -q\t-- Teyp kaseti çıkar\n"
+#~ "  -p\t-- /etc/mtab yerine /proc/mounts kullan\n"
+#~ "  -m\t-- Aygıt zaten bağlıysa aygıtı ayırma\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose      -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi         -f --floppy     -q --tape\n"
+#~ "  -n --noop   -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "Uzun Seçenekler:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "Uzun Seçenekler:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+
+#~ msgid "%s: unable to exec /bin/umount of `%s': %s\n"
+#~ msgstr "%s: yapılamadı exec /bin/umount `%s': %s\n"

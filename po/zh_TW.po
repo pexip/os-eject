@@ -6,7 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eject 2.1.2\n"
-"POT-Creation-Date: 2005-08-24 00:00+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-04 23:19+0100\n"
 "PO-Revision-Date: 2005-09-22 11:40+0800\n"
 "Last-Translator: Wei-Lun Chao <chaoweilun@pcmail.com.tw>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
@@ -15,19 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../eject.c:125
-#, c-format
+#: ../eject.c:155
+#, fuzzy, c-format
 msgid ""
 "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 "Usage:\n"
 "  eject -h\t\t\t\t-- display command usage and exit\n"
 "  eject -V\t\t\t\t-- display program version and exit\n"
-"  eject [-vnrsfq] [<name>]\t\t-- eject device\n"
+"  eject [-vnrsfqpm] [<name>]\t\t-- eject device\n"
 "  eject [-vn] -d\t\t\t-- display default device\n"
 "  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or off\n"
 "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
 "  eject [-vn] -t [<name>]\t\t-- close tray\n"
+"  eject [-vn] -T [<name>]\t\t-- toggle tray\n"
+"  eject [-vn] -i on|off|1|0 [<name>]\t-- toggle manual eject protection on/"
+"off\n"
 "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+"  eject [-vn] -X [<name>]\t\t-- list CD-ROM available speeds\n"
 "Options:\n"
 "  -v\t-- enable verbose output\n"
 "  -n\t-- don't eject, just show device found\n"
@@ -58,14 +63,16 @@ msgstr ""
 "  -p\t-- 使用 /proc/mounts 來取代 /etc/mtab\n"
 "  -m\t-- 即使裝置已掛載也不要卸載裝置\n"
 
-#: ../eject.c:148
+#: ../eject.c:187
+#, fuzzy, c-format
 msgid ""
 "Long options:\n"
-"  -h --help   -v --verbose\t -d --default\n"
+"  -h --help   -v --verbose      -d --default\n"
 "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
-"  -r --cdrom  -s --scsi\t -f --floppy\n"
-"  -q --tape   -n --noop\t -V --version\n"
-"  -p --proc   -m --no-unmount\n"
+"  -r --cdrom  -s --scsi         -f --floppy     -X --listspeed     -q --"
+"tape\n"
+"  -n --noop   -V --version\n"
+"  -p --proc   -m --no-unmount   -T --traytoggle\n"
 msgstr ""
 "長選項:\n"
 "  -h --help   -v --verbose\t -d --default\n"
@@ -74,7 +81,7 @@ msgstr ""
 "  -q --tape   -n --noop\t -V --version\n"
 "  -p --proc   -m --no-unmount\n"
 
-#: ../eject.c:156
+#: ../eject.c:206
 #, c-format
 msgid ""
 "Parameter <name> can be a device file or a mount point.\n"
@@ -85,290 +92,435 @@ msgstr ""
 "不加參數時，內定為 `%s'。\n"
 "程式預設會依序測試 -r, -s, -f, 和 -q 直到成功。\n"
 
-#: ../eject.c:209
+#: ../eject.c:262
 #, c-format
 msgid "%s: invalid argument to --auto/-a option\n"
 msgstr "%s: 對於 --auto/-a 選項而言是無效引數\n"
 
-#: ../eject.c:221
+#: ../eject.c:274
 #, c-format
 msgid "%s: invalid argument to --changerslot/-c option\n"
 msgstr "%s: 對於 --changerslot/-c 選項而言是無效引數\n"
 
-#: ../eject.c:233
+#: ../eject.c:286
 #, c-format
 msgid "%s: invalid argument to --cdspeed/-x option\n"
 msgstr "%s: 對於 ---cdspeed/-x 選項而言是無效引數\n"
 
-#: ../eject.c:273
+#: ../eject.c:312
+#, fuzzy, c-format
+msgid "%s: invalid argument to -i option\n"
+msgstr "%s: 對於 --auto/-a 選項而言是無效引數\n"
+
+#: ../eject.c:347
 #, c-format
 msgid "eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 msgstr "eject 版本 %s 作者 Jeff Tranter <tranter@pobox.com>\n"
 
-#: ../eject.c:283
+#: ../eject.c:357
 #, c-format
 msgid "%s: too many arguments\n"
 msgstr "%s: 太多引數了\n"
 
-#: ../eject.c:331
+#: ../eject.c:436 ../eject.c:1064 ../eject.c:1268
 #, c-format
 msgid "%s: could not allocate memory\n"
 msgstr "%s: 無法指派記憶體\n"
 
-#: ../eject.c:404
+#: ../eject.c:441
+#, c-format
+msgid "%s: FindDevice called too often\n"
+msgstr ""
+
+#: ../eject.c:539
 #, c-format
 msgid "%s: CD-ROM auto-eject command failed: %s\n"
 msgstr "%s: 光碟自動跳出命令失敗: %s\n"
 
-#: ../eject.c:421
+#: ../eject.c:556
 #, c-format
 msgid "%s: CD-ROM select disc command failed: %s\n"
 msgstr "%s: 選擇光碟的命令失敗: %s\n"
 
-#: ../eject.c:427
+#: ../eject.c:562
 #, c-format
 msgid "%s: CD-ROM load from slot command failed: %s\n"
 msgstr "%s: 從光碟櫃載入光碟的命令失敗: %s\n"
 
-#: ../eject.c:431
+#: ../eject.c:566
 #, c-format
 msgid "%s: IDE/ATAPI CD-ROM changer not supported by this kernel\n"
 msgstr "%s: IDE/ATAPI 介面的光碟櫃並不被本作業系統的核心所支援\n"
 
-#: ../eject.c:446
+#: ../eject.c:585
 #, c-format
 msgid "%s: CD-ROM tray close command failed: %s\n"
 msgstr "%s: 光碟機拖盤關閉的命令失敗: %s\n"
 
-#: ../eject.c:450
+#: ../eject.c:589
 #, c-format
 msgid "%s: CD-ROM tray close command not supported by this kernel\n"
 msgstr "%s: 光碟機拖盤關閉的命令並不被本作業系統的核心所支援\n"
 
-#: ../eject.c:467
+#: ../eject.c:637
+#, fuzzy, c-format
+msgid "%s: CD-ROM tray toggle command not supported by this kernel\n"
+msgstr "%s: 光碟機拖盤關閉的命令並不被本作業系統的核心所支援\n"
+
+#: ../eject.c:704
 #, c-format
 msgid "%s: CD-ROM select speed command failed: %s\n"
 msgstr "%s: 光碟機速度選擇的命令失敗: %s\n"
 
-#: ../eject.c:471
+#: ../eject.c:709 ../eject.c:810
 #, c-format
 msgid "%s: CD-ROM select speed command not supported by this kernel\n"
 msgstr "%s: 光碟機速度選擇的命令並不被本作業系統的核心所支援\n"
 
-#: ../eject.c:581
+#: ../eject.c:727
 #, c-format
-msgid "%s: unable to exec /bin/umount of `%s': %s\n"
-msgstr "%s: 無法執行 /bin/umount '%s': %s\n"
+msgid "%s: unable to read the speed from /proc/sys/dev/cdrom/info\n"
+msgstr ""
 
-#: ../eject.c:586
+#: ../eject.c:742
 #, c-format
-msgid "%s: unable to fork: %s\n"
-msgstr "%s: 無法 fork: %s\n"
+msgid "%s: error while allocating string\n"
+msgstr ""
 
-#: ../eject.c:591
-#, c-format
-msgid "%s: unmount of `%s' did not exit normally\n"
-msgstr "%s: 卸載 '%s' 發生不正常結束\n"
-
-#: ../eject.c:595
-#, c-format
-msgid "%s: unmount of `%s' failed\n"
-msgstr "%s: 卸載 '%s' 失敗\n"
-
-#: ../eject.c:608
-#, c-format
-msgid "%s: unable to open `%s'\n"
-msgstr "%s: 無法開啟 '%s'\n"
-
-#: ../eject.c:653 ../eject.c:740
-#, c-format
-msgid "unable to open %s: %s\n"
-msgstr "無法開啟 %s: %s\n"
-
-#: ../eject.c:700
-#, c-format
-msgid "%s: unable to open /etc/fstab: %s\n"
-msgstr "%s: 無法開啟 /etc/fstab 檔: %s\n"
-
-#: ../eject.c:750 ../eject.c:984
-#, c-format
-msgid "%s: unmounting `%s'\n"
-msgstr "%s: 卸載 '%s'\n"
-
-#: ../eject.c:823
-#, c-format
-msgid "%s: `%s' is a multipartition device\n"
-msgstr "%s: `%s' 是多重分割區裝置\n"
-
-#: ../eject.c:828
-#, c-format
-msgid "%s: `%s' is not a multipartition device\n"
-msgstr "%s: `%s' 不是多重分割區裝置\n"
-
-#: ../eject.c:841
-#, c-format
-msgid "%s: setting CD-ROM speed to auto\n"
-msgstr "%s: 設定光碟機速度為自動\n"
-
-#: ../eject.c:843
-#, c-format
-msgid "%s: setting CD-ROM speed to %dX\n"
-msgstr "%s: 設定光碟機速度為 %dX\n"
-
-#: ../eject.c:879
-#, c-format
-msgid "%s: default device: `%s'\n"
-msgstr "%s: 內定裝置為: '%s'\n"
-
-#: ../eject.c:887
-#, c-format
-msgid "%s: using default device `%s'\n"
-msgstr "%s: 使用內定裝置 '%s'\n"
-
-#: ../eject.c:896
-#, c-format
-msgid "%s: device name is `%s'\n"
-msgstr "%s: 裝置名稱為 '%s'\n"
-
-#: ../eject.c:901
-#, c-format
-msgid "%s: unable to find or open device for: `%s'\n"
-msgstr "%s: 找不到或無法開啟裝置: '%s'\n"
-
-#: ../eject.c:905
-#, c-format
-msgid "%s: expanded name is `%s'\n"
-msgstr "%s: 擴展名稱為 '%s'\n"
-
-#: ../eject.c:910
+#: ../eject.c:748 ../eject.c:1370
 #, c-format
 msgid "%s: `%s' is a link to `%s'\n"
 msgstr "%s: '%s' 被連結到 '%s'\n"
 
-#: ../eject.c:919
+#: ../eject.c:760
+#, c-format
+msgid "%s: error while finding CD-ROM name\n"
+msgstr ""
+
+#: ../eject.c:773 ../eject.c:781
+#, c-format
+msgid "%s: error while reading speed\n"
+msgstr ""
+
+#: ../eject.c:930
+#, fuzzy, c-format
+msgid "%s: unable to exec umount of `%s': %s\n"
+msgstr "%s: 無法執行 /bin/umount '%s': %s\n"
+
+#: ../eject.c:935
+#, c-format
+msgid "%s: unable to fork: %s\n"
+msgstr "%s: 無法 fork: %s\n"
+
+#: ../eject.c:940
+#, c-format
+msgid "%s: unmount of `%s' did not exit normally\n"
+msgstr "%s: 卸載 '%s' 發生不正常結束\n"
+
+#: ../eject.c:944
+#, c-format
+msgid "%s: unmount of `%s' failed\n"
+msgstr "%s: 卸載 '%s' 失敗\n"
+
+#: ../eject.c:964
+#, c-format
+msgid "%s: unable to open `%s'\n"
+msgstr "%s: 無法開啟 '%s'\n"
+
+#: ../eject.c:1010 ../eject.c:1165
+#, c-format
+msgid "unable to open %s: %s\n"
+msgstr "無法開啟 %s: %s\n"
+
+#: ../eject.c:1053
+#, c-format
+msgid "%s: unable to open /etc/fstab: %s\n"
+msgstr "%s: 無法開啟 /etc/fstab 檔: %s\n"
+
+#: ../eject.c:1127
+#, c-format
+msgid "%s: %s doesn't exist, skipping call\n"
+msgstr ""
+
+#: ../eject.c:1176 ../eject.c:1249
+#, fuzzy, c-format
+msgid "%s: %s is encrypted on real device %s\n"
+msgstr "%s: 使用內定裝置 '%s'\n"
+
+#: ../eject.c:1185
+#, c-format
+msgid "%s: unmounting `%s'\n"
+msgstr "%s: 卸載 '%s'\n"
+
+#: ../eject.c:1275
+#, c-format
+msgid "%s: `%s' is a multipartition device\n"
+msgstr "%s: `%s' 是多重分割區裝置\n"
+
+#: ../eject.c:1280
+#, c-format
+msgid "%s: `%s' is not a multipartition device\n"
+msgstr "%s: `%s' 不是多重分割區裝置\n"
+
+#: ../eject.c:1293
+#, c-format
+msgid "%s: setting CD-ROM speed to auto\n"
+msgstr "%s: 設定光碟機速度為自動\n"
+
+#: ../eject.c:1295
+#, c-format
+msgid "%s: setting CD-ROM speed to %dX\n"
+msgstr "%s: 設定光碟機速度為 %dX\n"
+
+#: ../eject.c:1333
+#, c-format
+msgid "%s: default device: `%s'\n"
+msgstr "%s: 內定裝置為: '%s'\n"
+
+#: ../eject.c:1341
+#, c-format
+msgid "%s: using default device `%s'\n"
+msgstr "%s: 使用內定裝置 '%s'\n"
+
+#: ../eject.c:1350
+#, c-format
+msgid "%s: device name is `%s'\n"
+msgstr "%s: 裝置名稱為 '%s'\n"
+
+#: ../eject.c:1356
+#, c-format
+msgid "%s: unable to find or open device for: `%s'\n"
+msgstr "%s: 找不到或無法開啟裝置: '%s'\n"
+
+#: ../eject.c:1361
+#, c-format
+msgid "%s: expanded name is `%s'\n"
+msgstr "%s: 擴展名稱為 '%s'\n"
+
+#: ../eject.c:1381
 #, c-format
 msgid "%s: maximum symbolic link depth exceeded: `%s'\n"
 msgstr "%s: 超過符號連結的最大深度值: '%s'\n"
 
-#: ../eject.c:927
+#: ../eject.c:1389
 #, c-format
 msgid "%s: `%s' is mounted at `%s'\n"
 msgstr "%s: '%s' 被掛載到 '%s'\n"
 
-#: ../eject.c:929
+#: ../eject.c:1392
 #, c-format
 msgid "%s: `%s' is not mounted\n"
 msgstr "%s: '%s' 並未掛載\n"
 
-#: ../eject.c:941
+#: ../eject.c:1404
 #, c-format
 msgid "%s: `%s' can be mounted at `%s'\n"
 msgstr "%s: '%s' 可掛載於 '%s'\n"
 
-#: ../eject.c:943
+#: ../eject.c:1406
 #, c-format
 msgid "%s: `%s' is not a mount point\n"
 msgstr "%s: '%s' 並不是掛載點\n"
 
-#: ../eject.c:949
+#: ../eject.c:1413
+#, c-format
+msgid "%s: tried to use `%s' as device name but it is no block device\n"
+msgstr ""
+
+#: ../eject.c:1421
 #, c-format
 msgid "%s: device is `%s'\n"
 msgstr "%s: 裝置是 '%s'\n"
 
-#: ../eject.c:951
+#: ../eject.c:1423
 #, c-format
 msgid "%s: exiting due to -n/--noop option\n"
 msgstr "%s: 由於 -n/--noop 選項的因素而跳出\n"
 
-#: ../eject.c:959
+#: ../eject.c:1438
 #, c-format
 msgid "%s: enabling auto-eject mode for `%s'\n"
 msgstr "%s: 開啟 '%s' 自動跳出模式\n"
 
-#: ../eject.c:961
+#: ../eject.c:1440
 #, c-format
 msgid "%s: disabling auto-eject mode for `%s'\n"
 msgstr "%s: 關閉 '%s' 自動跳出模式\n"
 
-#: ../eject.c:971
+#: ../eject.c:1450
 #, c-format
 msgid "%s: closing tray\n"
 msgstr "%s: 關閉拖盤\n"
 
-#: ../eject.c:997
+#: ../eject.c:1460
+#, fuzzy, c-format
+msgid "%s: listing CD-ROM speed\n"
+msgstr "%s: 設定光碟機速度為 %dX\n"
+
+#: ../eject.c:1472
+#, fuzzy, c-format
+msgid "%s: unmounting device `%s' from `%s'\n"
+msgstr "%s: 卸載 '%s'\n"
+
+#: ../eject.c:1485
+#, fuzzy, c-format
+msgid "%s: toggling tray\n"
+msgstr "%s: 關閉拖盤\n"
+
+#: ../eject.c:1495
 #, c-format
 msgid "%s: selecting CD-ROM disc #%d\n"
 msgstr "%s: 選擇光碟片編號 #%d\n"
 
-#: ../eject.c:1015
+#: ../eject.c:1513
 #, c-format
 msgid "%s: trying to eject `%s' using CD-ROM eject command\n"
 msgstr "%s: 嘗試使用 CD-ROM 跳出指令將 '%s' 跳出\n"
 
-#: ../eject.c:1019
+#: ../eject.c:1517
 #, c-format
 msgid "%s: CD-ROM eject command succeeded\n"
 msgstr "%s: 光碟片跳出指令成功\n"
 
-#: ../eject.c:1021
+#: ../eject.c:1519
 #, c-format
 msgid "%s: CD-ROM eject command failed\n"
 msgstr "%s: 光碟片跳出指令失敗\n"
 
-#: ../eject.c:1027
+#: ../eject.c:1526
 #, c-format
 msgid "%s: trying to eject `%s' using SCSI commands\n"
 msgstr "%s: 嘗試使用 SCSI 跳出指令將 '%s' 跳出\n"
 
-#: ../eject.c:1031
+#: ../eject.c:1530
 #, c-format
 msgid "%s: SCSI eject succeeded\n"
 msgstr "%s: SCSI 跳出成功\n"
 
-#: ../eject.c:1033
+#: ../eject.c:1532
 #, c-format
 msgid "%s: SCSI eject failed\n"
 msgstr "%s: SCSI 跳出失敗\n"
 
-#: ../eject.c:1039
+#: ../eject.c:1540
 #, c-format
 msgid "%s: trying to eject `%s' using floppy eject command\n"
 msgstr "%s: 嘗試使用軟碟跳出指令將 '%s' 跳出\n"
 
-#: ../eject.c:1043
+#: ../eject.c:1544
 #, c-format
 msgid "%s: floppy eject command succeeded\n"
 msgstr "%s: 軟碟跳出命令成功\n"
 
-#: ../eject.c:1045
+#: ../eject.c:1546
 #, c-format
 msgid "%s: floppy eject command failed\n"
 msgstr "%s: 軟碟跳出命令失敗\n"
 
-#: ../eject.c:1051
+#: ../eject.c:1554
 #, c-format
 msgid "%s: trying to eject `%s' using tape offline command\n"
 msgstr "%s: 嘗試使用磁帶離線指令將 '%s' 跳出\n"
 
-#: ../eject.c:1055
+#: ../eject.c:1558
 #, c-format
 msgid "%s: tape offline command succeeded\n"
 msgstr "%s: 磁帶離線命令成功\n"
 
-#: ../eject.c:1057
+#: ../eject.c:1560
 #, c-format
 msgid "%s: tape offline command failed\n"
 msgstr "%s: 磁帶離線命令失敗\n"
 
-#: ../eject.c:1062
+#: ../eject.c:1566
 #, c-format
 msgid "%s: unable to eject, last error: %s\n"
 msgstr "%s: 無法跳出，錯誤碼為: %s\n"
 
-#: ../volname.c:58
+#: ../volname.c:59
+#, c-format
 msgid "usage: volname [<device-file>]\n"
 msgstr "用法: volname [<裝置檔名>]\n"
 
-#: ../volname.c:64 ../volname.c:70 ../volname.c:76
+#: ../volname.c:65 ../volname.c:71 ../volname.c:77
 msgid "volname"
 msgstr "volname"
+
+#, fuzzy
+#~ msgid ""
+#~ "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
+#~ "Usage:\n"
+#~ "  eject -h\t\t\t\t-- display command usage and exit\n"
+#~ "  eject -V\t\t\t\t-- display program version and exit\n"
+#~ "  eject [-vnrsfq] [<name>]\t\t-- eject device\n"
+#~ "  eject [-vn] -d\t\t\t-- display default device\n"
+#~ "  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or "
+#~ "off\n"
+#~ "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
+#~ "  eject [-vn] -t [<name>]\t\t-- close tray\n"
+#~ "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+#~ "Options:\n"
+#~ "  -v\t-- enable verbose output\n"
+#~ "  -n\t-- don't eject, just show device found\n"
+#~ "  -r\t-- eject CD-ROM\n"
+#~ "  -s\t-- eject SCSI device\n"
+#~ "  -f\t-- eject floppy\n"
+#~ "  -q\t-- eject tape\n"
+#~ "  -p\t-- use /proc/mounts instead of /etc/mtab\n"
+#~ "  -m\t-- do not unmount device even if it is mounted\n"
+#~ msgstr ""
+#~ "Eject 版本 %s 作者 Jeff Tranter (tranter@pobox.com)\n"
+#~ "用法:\n"
+#~ "  eject -h\t\t\t\t-- 顯示命令用法後結束\n"
+#~ "  eject -V\t\t\t\t-- 顯示程式版本後結束\n"
+#~ "  eject [-vnrsfq] [<名稱>]\t\t-- 跳出裝置\n"
+#~ "  eject [-vn] -d\t\t\t-- 顯示內定裝置名稱\n"
+#~ "  eject [-vn] -a on|off|1|0 [<名稱>]\t-- 自動跳出功能開關\n"
+#~ "  eject [-vn] -c <插槽> [<名稱>]\t-- 切換光碟櫃內的光碟片\n"
+#~ "  eject [-vn] -t [<名稱>]\t\t-- 關閉拖盤\n"
+#~ "  eject [-vn] -x <速度> [<名稱>]\t-- 設定光碟機最快速度\n"
+#~ "選項:\n"
+#~ "  -v\t-- 顯示詳細狀態\n"
+#~ "  -n\t-- 不要跳出，只顯示裝置有找到即可\n"
+#~ "  -r\t-- 跳出 CD-ROM\n"
+#~ "  -s\t-- 跳出 SCSI 裝置\n"
+#~ "  -f\t-- 跳出軟碟片\n"
+#~ "  -q\t-- 跳出磁帶\n"
+#~ "  -p\t-- 使用 /proc/mounts 來取代 /etc/mtab\n"
+#~ "  -m\t-- 即使裝置已掛載也不要卸載裝置\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose      -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi         -f --floppy     -q --tape\n"
+#~ "  -n --noop   -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "長選項:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "長選項:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+
+#, fuzzy
+#~ msgid "%s: unable to exec /bin/umount of `%s': %s\n"
+#~ msgstr "%s: 無法執行 /bin/umount '%s': %s\n"

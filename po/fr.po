@@ -5,7 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2001-06-07 12:23+0800\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-11-04 23:19+0100\n"
 "PO-Revision-Date: 2002-01-04 18:57GMT\n"
 "Last-Translator: mathic <mathic@netcourrier.com>\n"
 "Language-Team: Français\n"
@@ -14,24 +15,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: ../eject.c:110 ../eject.c:893
-#, c-format
-msgid "%s: device is `%s'\n"
-msgstr "%s: le périphérique est `%s'\n"
-
-#: ../eject.c:112
-#, c-format
+#: ../eject.c:155
+#, fuzzy, c-format
 msgid ""
 "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 "Usage:\n"
 "  eject -h\t\t\t\t-- display command usage and exit\n"
 "  eject -V\t\t\t\t-- display program version and exit\n"
-"  eject [-vnrsfq] [<name>]\t\t-- eject device\n"
+"  eject [-vnrsfqpm] [<name>]\t\t-- eject device\n"
 "  eject [-vn] -d\t\t\t-- display default device\n"
 "  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or off\n"
 "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
 "  eject [-vn] -t [<name>]\t\t-- close tray\n"
+"  eject [-vn] -T [<name>]\t\t-- toggle tray\n"
+"  eject [-vn] -i on|off|1|0 [<name>]\t-- toggle manual eject protection on/"
+"off\n"
 "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+"  eject [-vn] -X [<name>]\t\t-- list CD-ROM available speeds\n"
 "Options:\n"
 "  -v\t-- enable verbose output\n"
 "  -n\t-- don't eject, just show device found\n"
@@ -40,6 +40,7 @@ msgid ""
 "  -f\t-- eject floppy\n"
 "  -q\t-- eject tape\n"
 "  -p\t-- use /proc/mounts instead of /etc/mtab\n"
+"  -m\t-- do not unmount device even if it is mounted\n"
 msgstr ""
 "Eject version %s par Jeff Tranter (tranter@pobox.com)\n"
 "Usage:\n"
@@ -50,7 +51,8 @@ msgstr ""
 "  eject [-vn] -a on|off|1|0 [<nom>]\t-- contrôler l'auto-éjection\n"
 "  eject [-vn] -c <slot> [<nom>]\t-- changer disques de CD-ROM changer\n"
 "  eject [-vn] -t [<nom>]\t\t-- fermer le plateau\n"
-"  eject [-vn] -x <vitesse> [<nom>]\t-- mettre le CD-ROM à la vitesse maximum\n"
+"  eject [-vn] -x <vitesse> [<nom>]\t-- mettre le CD-ROM à la vitesse "
+"maximum\n"
 "Options:\n"
 "  -v\t-- afficher verbeux\n"
 "  -n\t-- n'éjecte pas, afficher device seulement\n"
@@ -60,308 +62,471 @@ msgstr ""
 "  -q\t-- éjecter la cassette (tape)\n"
 "  -p\t-- utiliser /proc/mounts au lieu de /etc/mtab\n"
 
-#: ../eject.c:133
+#: ../eject.c:187
+#, fuzzy, c-format
 msgid ""
 "Long options:\n"
-"  -h --help   -v --verbose\t -d --default\n"
+"  -h --help   -v --verbose      -d --default\n"
 "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
-"  -r --cdrom  -s --scsi\t -f --floppy\n"
-"  -q --tape   -n --noop\t -V --version\n"
-"  -p --proc\n"
+"  -r --cdrom  -s --scsi         -f --floppy     -X --listspeed     -q --"
+"tape\n"
+"  -n --noop   -V --version\n"
+"  -p --proc   -m --no-unmount   -T --traytoggle\n"
 msgstr ""
 "Options long:\n"
-"  -h --help   -v --verbose\t -d --default\n"
+"  -h --help   -v --verbose      -d --default\n"
 "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
-"  -r --cdrom  -s --scsi\t -f --floppy\n"
-"  -q --tape   -n --noop\t -V --version\n"
-"  -p --proc\n"
+"  -r --cdrom  -s --scsi         -f --floppy     -X --listspeed     -q --"
+"tape\n"
+"  -n --noop   -V --version\n"
+"  -p --proc   -m --no-unmount   -T --traytoggle\n"
 
-#: ../eject.c:141
+#: ../eject.c:206
 #, c-format
 msgid ""
 "Parameter <name> can be a device file or a mount point.\n"
 "If omitted, name defaults to `%s'.\n"
 "By default tries -r, -s, -f, and -q in order until success.\n"
 msgstr ""
-"Paramètre <nom> ce peut-être un fichier de périphérique ou un point de montage.\n"
+"Paramètre <nom> ce peut-être un fichier de périphérique ou un point de "
+"montage.\n"
 "Si omettre, nom defaut de `%s'.\n"
 "Par défaut utiliser -r, -s, -f, et -q en ordre jusqu'au succes.\n"
 
-#: ../eject.c:193
+#: ../eject.c:262
 #, c-format
 msgid "%s: invalid argument to --auto/-a option\n"
 msgstr "%s: argument invalide pour l'option --auto/-a\n"
 
-#: ../eject.c:205
+#: ../eject.c:274
 #, c-format
 msgid "%s: invalid argument to --changerslot/-c option\n"
 msgstr "%s: argument invalide pour l'option --changerslot/-c\n"
 
-#: ../eject.c:217
+#: ../eject.c:286
 #, c-format
 msgid "%s: invalid argument to --cdspeed/-x option\n"
 msgstr "%s: argument invalide pour l'option --cdspeed/-x\n"
 
-#: ../eject.c:254
+#: ../eject.c:312
+#, fuzzy, c-format
+msgid "%s: invalid argument to -i option\n"
+msgstr "%s: argument invalide pour l'option --auto/-a\n"
+
+#: ../eject.c:347
 #, c-format
 msgid "eject version %s by Jeff Tranter (tranter@pobox.com)\n"
 msgstr "eject version %s par Jeff Tranter (tranter@pobox.com)\n"
 
-#: ../eject.c:264
+#: ../eject.c:357
 #, c-format
 msgid "%s: too many arguments\n"
 msgstr "%s: trop d'options\n"
 
-#: ../eject.c:366
+#: ../eject.c:436 ../eject.c:1064 ../eject.c:1268
+#, c-format
+msgid "%s: could not allocate memory\n"
+msgstr ""
+
+#: ../eject.c:441
+#, c-format
+msgid "%s: FindDevice called too often\n"
+msgstr ""
+
+#: ../eject.c:539
 #, c-format
 msgid "%s: CD-ROM auto-eject command failed: %s\n"
 msgstr "%s: l'auto-ejection du CD-ROM ne peut pas s'accomplir: %s\n"
 
-#: ../eject.c:383
+#: ../eject.c:556
 #, c-format
 msgid "%s: CD-ROM select disc command failed: %s\n"
 msgstr "%s: la sélection du lecteur de CD-ROM ne peut pas s'accomplir: %s\n"
 
-#: ../eject.c:389
+#: ../eject.c:562
 #, c-format
 msgid "%s: CD-ROM load from slot command failed: %s\n"
 msgstr "%s: le chargement du CD-ROM ne peut pas s'accomplir: %s\n"
 
-#: ../eject.c:393
+#: ../eject.c:566
 #, c-format
 msgid "%s: IDE/ATAPI CD-ROM changer not supported by this kernel\n"
 msgstr "%s: le changeur IDE/ATAPI CD-ROM n'est pas supporté par ce noyau\n"
 
-#: ../eject.c:408
+#: ../eject.c:585
 #, c-format
 msgid "%s: CD-ROM tray close command failed: %s\n"
 msgstr "%s: le plateau du CD-ROM ne peut pas se fermer: %s\n"
 
-#: ../eject.c:412
+#: ../eject.c:589
 #, c-format
 msgid "%s: CD-ROM tray close command not supported by this kernel\n"
-msgstr "%s: la commande de fermeture du plateau du CD-ROM n'est pas supportée par ce noyau\n"
+msgstr ""
+"%s: la commande de fermeture du plateau du CD-ROM n'est pas supportée par ce "
+"noyau\n"
 
-#: ../eject.c:429
+#: ../eject.c:637
+#, fuzzy, c-format
+msgid "%s: CD-ROM tray toggle command not supported by this kernel\n"
+msgstr ""
+"%s: la commande de fermeture du plateau du CD-ROM n'est pas supportée par ce "
+"noyau\n"
+
+#: ../eject.c:704
 #, c-format
 msgid "%s: CD-ROM select speed command failed: %s\n"
 msgstr "%s: la sélection de la vitesse du CD-ROM ne peut pas s'accomplir: %s\n"
 
-#: ../eject.c:433
+#: ../eject.c:709 ../eject.c:810
 #, c-format
 msgid "%s: CD-ROM select speed command not supported by this kernel\n"
-msgstr "%s: la commande de sélection du CD-ROM n'est pas supportée par ce noyau\n"
+msgstr ""
+"%s: la commande de sélection du CD-ROM n'est pas supportée par ce noyau\n"
 
-#: ../eject.c:543
+#: ../eject.c:727
 #, c-format
-msgid "%s: unable to exec /bin/umount of `%s': %s\n"
-msgstr "%s: incapable de faire exec /bin/umount de `%s': %s\n"
+msgid "%s: unable to read the speed from /proc/sys/dev/cdrom/info\n"
+msgstr ""
 
-#: ../eject.c:548
+#: ../eject.c:742
 #, c-format
-msgid "%s: unable to fork: %s\n"
-msgstr "%s: incapable to faire fork: %s\n"
+msgid "%s: error while allocating string\n"
+msgstr ""
 
-#: ../eject.c:553
-#, c-format
-msgid "%s: unmount of `%s' did not exit normally\n"
-msgstr "%s: le démontage de `%s' n'a pas pu sortir normalement\n"
-
-#: ../eject.c:557
-#, c-format
-msgid "%s: unmount of `%s' failed\n"
-msgstr "%s: le démontage de `%s' a échoué\n"
-
-#: ../eject.c:570
-#, c-format
-msgid "%s: unable to open `%s'\n"
-msgstr "%s: impossible d'ouvrir le fichier `%s'\n"
-
-#: ../eject.c:615 ../eject.c:691
-#, c-format
-msgid "unable to open %s: %s\n"
-msgstr "impossible d'ouvrir le fichier %s: %s\n"
-
-#: ../eject.c:655
-#, c-format
-msgid "%s: unable to open /etc/fstab: %s\n"
-msgstr "%s: impossible d'ouvrir le fichier /etc/fstab: %s\n"
-
-#: ../eject.c:701 ../eject.c:928
-#, c-format
-msgid "%s: unmounting `%s'\n"
-msgstr "%s: démontage de `%s'\n"
-
-#: ../eject.c:768
-#, c-format
-msgid "%s: `%s' is a multipartition device\n"
-msgstr "%s: `%s' est un périphérique à plusieurs partitions\n"
-
-#: ../eject.c:773
-#, c-format
-msgid "%s: `%s' is not a multipartition device\n"
-msgstr "%s: `%s' n'est pas un périphérique partitionné\n"
-
-#: ../eject.c:786
-#, c-format
-msgid "%s: setting CD-ROM speed to auto\n"
-msgstr "%s: mettre la vitesse du CD-ROM en position automatique\n"
-
-#: ../eject.c:788
-#, c-format
-msgid "%s: setting CD-ROM speed to %dX\n"
-msgstr "%s: mettre la vitesse du CD-ROM à %dX\n"
-
-#: ../eject.c:824
-#, c-format
-msgid "%s: default device: `%s'\n"
-msgstr "%s: périphérique par défaut: `%s'\n"
-
-#: ../eject.c:832
-#, c-format
-msgid "%s: using default device `%s'\n"
-msgstr "%s: utiliser le périphérique par défaut `%s'\n"
-
-#: ../eject.c:841
-#, c-format
-msgid "%s: device name is `%s'\n"
-msgstr "%s: le nom du périphérique est `%s'\n"
-
-#: ../eject.c:846
-#, c-format
-msgid "%s: unable to find or open device for: `%s'\n"
-msgstr "%s: impossible de trouver ou d'ouvrir le périphérique pour: `%s'\n"
-
-#: ../eject.c:850
-#, c-format
-msgid "%s: expanded name is `%s'\n"
-msgstr "%s: le nom étendu est `%s'\n"
-
-#: ../eject.c:855
+#: ../eject.c:748 ../eject.c:1370
 #, c-format
 msgid "%s: `%s' is a link to `%s'\n"
 msgstr "%s: `%s' est un lien de `%s'\n"
 
-#: ../eject.c:864
+#: ../eject.c:760
+#, c-format
+msgid "%s: error while finding CD-ROM name\n"
+msgstr ""
+
+#: ../eject.c:773 ../eject.c:781
+#, c-format
+msgid "%s: error while reading speed\n"
+msgstr ""
+
+#: ../eject.c:930
+#, fuzzy, c-format
+msgid "%s: unable to exec umount of `%s': %s\n"
+msgstr "%s: incapable de faire exec /bin/umount de `%s': %s\n"
+
+#: ../eject.c:935
+#, c-format
+msgid "%s: unable to fork: %s\n"
+msgstr "%s: incapable to faire fork: %s\n"
+
+#: ../eject.c:940
+#, c-format
+msgid "%s: unmount of `%s' did not exit normally\n"
+msgstr "%s: le démontage de `%s' n'a pas pu sortir normalement\n"
+
+#: ../eject.c:944
+#, c-format
+msgid "%s: unmount of `%s' failed\n"
+msgstr "%s: le démontage de `%s' a échoué\n"
+
+#: ../eject.c:964
+#, c-format
+msgid "%s: unable to open `%s'\n"
+msgstr "%s: impossible d'ouvrir le fichier `%s'\n"
+
+#: ../eject.c:1010 ../eject.c:1165
+#, c-format
+msgid "unable to open %s: %s\n"
+msgstr "impossible d'ouvrir le fichier %s: %s\n"
+
+#: ../eject.c:1053
+#, c-format
+msgid "%s: unable to open /etc/fstab: %s\n"
+msgstr "%s: impossible d'ouvrir le fichier /etc/fstab: %s\n"
+
+#: ../eject.c:1127
+#, c-format
+msgid "%s: %s doesn't exist, skipping call\n"
+msgstr ""
+
+#: ../eject.c:1176 ../eject.c:1249
+#, fuzzy, c-format
+msgid "%s: %s is encrypted on real device %s\n"
+msgstr "%s: utiliser le périphérique par défaut `%s'\n"
+
+#: ../eject.c:1185
+#, c-format
+msgid "%s: unmounting `%s'\n"
+msgstr "%s: démontage de `%s'\n"
+
+#: ../eject.c:1275
+#, c-format
+msgid "%s: `%s' is a multipartition device\n"
+msgstr "%s: `%s' est un périphérique à plusieurs partitions\n"
+
+#: ../eject.c:1280
+#, c-format
+msgid "%s: `%s' is not a multipartition device\n"
+msgstr "%s: `%s' n'est pas un périphérique partitionné\n"
+
+#: ../eject.c:1293
+#, c-format
+msgid "%s: setting CD-ROM speed to auto\n"
+msgstr "%s: mettre la vitesse du CD-ROM en position automatique\n"
+
+#: ../eject.c:1295
+#, c-format
+msgid "%s: setting CD-ROM speed to %dX\n"
+msgstr "%s: mettre la vitesse du CD-ROM à %dX\n"
+
+#: ../eject.c:1333
+#, c-format
+msgid "%s: default device: `%s'\n"
+msgstr "%s: périphérique par défaut: `%s'\n"
+
+#: ../eject.c:1341
+#, c-format
+msgid "%s: using default device `%s'\n"
+msgstr "%s: utiliser le périphérique par défaut `%s'\n"
+
+#: ../eject.c:1350
+#, c-format
+msgid "%s: device name is `%s'\n"
+msgstr "%s: le nom du périphérique est `%s'\n"
+
+#: ../eject.c:1356
+#, c-format
+msgid "%s: unable to find or open device for: `%s'\n"
+msgstr "%s: impossible de trouver ou d'ouvrir le périphérique pour: `%s'\n"
+
+#: ../eject.c:1361
+#, c-format
+msgid "%s: expanded name is `%s'\n"
+msgstr "%s: le nom étendu est `%s'\n"
+
+#: ../eject.c:1381
 #, c-format
 msgid "%s: maximum symbolic link depth exceeded: `%s'\n"
 msgstr "%s: hauteur de lien symbolique maximum dépassé: `%s'\n"
 
-#: ../eject.c:872
+#: ../eject.c:1389
 #, c-format
 msgid "%s: `%s' is mounted at `%s'\n"
 msgstr "%s: `%s' est monté à `%s'\n"
 
-#: ../eject.c:874
+#: ../eject.c:1392
 #, c-format
 msgid "%s: `%s' is not mounted\n"
 msgstr "%s: `%s' n'est pas monté\n"
 
-#: ../eject.c:885
+#: ../eject.c:1404
 #, c-format
 msgid "%s: `%s' can be mounted at `%s'\n"
 msgstr "%s: `%s' ne peut pas être montré à `%s'\n"
 
-#: ../eject.c:887
+#: ../eject.c:1406
 #, c-format
 msgid "%s: `%s' is not a mount point\n"
 msgstr "%s: `%s' n'est pas un point de montage\n"
 
-#: ../eject.c:895
+#: ../eject.c:1413
+#, c-format
+msgid "%s: tried to use `%s' as device name but it is no block device\n"
+msgstr ""
+
+#: ../eject.c:1421
+#, c-format
+msgid "%s: device is `%s'\n"
+msgstr "%s: le périphérique est `%s'\n"
+
+#: ../eject.c:1423
 #, c-format
 msgid "%s: exiting due to -n/--noop option\n"
 msgstr "%s: sorti à cause de l'option -n/--noop\n"
 
-#: ../eject.c:903
+#: ../eject.c:1438
 #, c-format
 msgid "%s: enabling auto-eject mode for `%s'\n"
 msgstr "%s: activation du mode d'auto-éjection pour `%s'\n"
 
-#: ../eject.c:905
+#: ../eject.c:1440
 #, c-format
 msgid "%s: disabling auto-eject mode for `%s'\n"
 msgstr "%s: désactivation du mode d'auto-éjection pour `%s'\n"
 
-#: ../eject.c:915
+#: ../eject.c:1450
 #, c-format
 msgid "%s: closing tray\n"
 msgstr "%s: ferme le plateau\n"
 
-#: ../eject.c:941
+#: ../eject.c:1460
+#, fuzzy, c-format
+msgid "%s: listing CD-ROM speed\n"
+msgstr "%s: mettre la vitesse du CD-ROM à %dX\n"
+
+#: ../eject.c:1472
+#, fuzzy, c-format
+msgid "%s: unmounting device `%s' from `%s'\n"
+msgstr "%s: démontage de `%s'\n"
+
+#: ../eject.c:1485
+#, fuzzy, c-format
+msgid "%s: toggling tray\n"
+msgstr "%s: ferme le plateau\n"
+
+#: ../eject.c:1495
 #, c-format
 msgid "%s: selecting CD-ROM disc #%d\n"
 msgstr "%s: selection du disque CD-ROM #%d\n"
 
-#: ../eject.c:959
+#: ../eject.c:1513
 #, c-format
 msgid "%s: trying to eject `%s' using CD-ROM eject command\n"
 msgstr "%s: tentative d'éjection `%s' avec la commande d'éjection du CD-ROM\n"
 
-#: ../eject.c:963
+#: ../eject.c:1517
 #, c-format
 msgid "%s: CD-ROM eject command succeeded\n"
 msgstr "%s: la commande d'éjection du CD-ROM a réussi\n"
 
-#: ../eject.c:965
+#: ../eject.c:1519
 #, c-format
 msgid "%s: CD-ROM eject command failed\n"
 msgstr "%s: la commande d'éjection du CD-ROM n'a pas réussi\n"
 
-#: ../eject.c:971
+#: ../eject.c:1526
 #, c-format
 msgid "%s: trying to eject `%s' using SCSI commands\n"
 msgstr "%s: tentative d'éjection `%s' avec la commande SCSI\n"
 
-#: ../eject.c:975
+#: ../eject.c:1530
 #, c-format
 msgid "%s: SCSI eject succeeded\n"
 msgstr "%s: la commande d'éjection SCSI a réussi\n"
 
-#: ../eject.c:977
+#: ../eject.c:1532
 #, c-format
 msgid "%s: SCSI eject failed\n"
 msgstr "%s: la commande SCSI d'éjection n'a pas réussi\n"
 
-#: ../eject.c:983
+#: ../eject.c:1540
 #, c-format
 msgid "%s: trying to eject `%s' using floppy eject command\n"
 msgstr "%s: tentative d'éjection `%s' avec la commande de la disquette\n"
 
-#: ../eject.c:987
+#: ../eject.c:1544
 #, c-format
 msgid "%s: floppy eject command succeeded\n"
 msgstr "%s: la commande de la disquette à réussi\n"
 
-#: ../eject.c:989
+#: ../eject.c:1546
 #, c-format
 msgid "%s: floppy eject command failed\n"
 msgstr "%s: la commande de la disquette n'a pas réussi\n"
 
-#: ../eject.c:995
+#: ../eject.c:1554
 #, c-format
 msgid "%s: trying to eject `%s' using tape offline command\n"
-msgstr "%s: la tentative d'éjection `%s' avec la commande de la cassette (tape) hors ligne\n"
+msgstr ""
+"%s: la tentative d'éjection `%s' avec la commande de la cassette (tape) hors "
+"ligne\n"
 
-#: ../eject.c:999
+#: ../eject.c:1558
 #, c-format
 msgid "%s: tape offline command succeeded\n"
 msgstr "%s: la commande de la cassette (tape) hors ligne a réussi\n"
 
-#: ../eject.c:1001
+#: ../eject.c:1560
 #, c-format
 msgid "%s: tape offline command failed\n"
 msgstr "%s: la command de la cassette (tape) hors lignen'a pas réussi\n"
 
-#: ../eject.c:1006
+#: ../eject.c:1566
 #, c-format
 msgid "%s: unable to eject, last error: %s\n"
 msgstr "%s: incapable d'éjecter, dernière erreur: %s\n"
 
-#: ../volname.c:57
+#: ../volname.c:59
+#, c-format
 msgid "usage: volname [<device-file>]\n"
 msgstr "usage: volname [<fichier de périphérique>]\n"
 
-#: ../volname.c:63 ../volname.c:69 ../volname.c:75
+#: ../volname.c:65 ../volname.c:71 ../volname.c:77
 msgid "volname"
 msgstr "volname"
 
+#, fuzzy
+#~ msgid ""
+#~ "Eject version %s by Jeff Tranter (tranter@pobox.com)\n"
+#~ "Usage:\n"
+#~ "  eject -h\t\t\t\t-- display command usage and exit\n"
+#~ "  eject -V\t\t\t\t-- display program version and exit\n"
+#~ "  eject [-vnrsfq] [<name>]\t\t-- eject device\n"
+#~ "  eject [-vn] -d\t\t\t-- display default device\n"
+#~ "  eject [-vn] -a on|off|1|0 [<name>]\t-- turn auto-eject feature on or "
+#~ "off\n"
+#~ "  eject [-vn] -c <slot> [<name>]\t-- switch discs on a CD-ROM changer\n"
+#~ "  eject [-vn] -t [<name>]\t\t-- close tray\n"
+#~ "  eject [-vn] -x <speed> [<name>]\t-- set CD-ROM max speed\n"
+#~ "Options:\n"
+#~ "  -v\t-- enable verbose output\n"
+#~ "  -n\t-- don't eject, just show device found\n"
+#~ "  -r\t-- eject CD-ROM\n"
+#~ "  -s\t-- eject SCSI device\n"
+#~ "  -f\t-- eject floppy\n"
+#~ "  -q\t-- eject tape\n"
+#~ "  -p\t-- use /proc/mounts instead of /etc/mtab\n"
+#~ "  -m\t-- do not unmount device even if it is mounted\n"
+#~ msgstr ""
+#~ "Eject version %s par Jeff Tranter (tranter@pobox.com)\n"
+#~ "Usage:\n"
+#~ "  eject -h\t\t\t\t-- afficher usage de commande et sortir\n"
+#~ "  eject -V\t\t\t\t-- afficher version de commande et sortir\n"
+#~ "  eject [-vnrsfq] [<nom>]\t\t-- éjecter le disque \n"
+#~ "  eject [-vn] -d\t\t\t-- afficher le périphérique par défaut\n"
+#~ "  eject [-vn] -a on|off|1|0 [<nom>]\t-- contrôler l'auto-éjection\n"
+#~ "  eject [-vn] -c <slot> [<nom>]\t-- changer disques de CD-ROM changer\n"
+#~ "  eject [-vn] -t [<nom>]\t\t-- fermer le plateau\n"
+#~ "  eject [-vn] -x <vitesse> [<nom>]\t-- mettre le CD-ROM à la vitesse "
+#~ "maximum\n"
+#~ "Options:\n"
+#~ "  -v\t-- afficher verbeux\n"
+#~ "  -n\t-- n'éjecte pas, afficher device seulement\n"
+#~ "  -r\t-- éjecter le CD-ROM\n"
+#~ "  -s\t-- éjecter périphérique SCSI\n"
+#~ "  -f\t-- éjecter la disquette\n"
+#~ "  -q\t-- éjecter la cassette (tape)\n"
+#~ "  -p\t-- utiliser /proc/mounts au lieu de /etc/mtab\n"
+
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose      -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi         -f --floppy     -q --tape\n"
+#~ "  -n --noop   -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "Options long:\n"
+#~ "  -h --help   -v --verbose      -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi         -f --floppy     -q --tape\n"
+#~ "  -n --noop   -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Long options:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc   -m --no-unmount\n"
+#~ msgstr ""
+#~ "Options long:\n"
+#~ "  -h --help   -v --verbose\t -d --default\n"
+#~ "  -a --auto   -c --changerslot  -t --trayclose  -x --cdspeed\n"
+#~ "  -r --cdrom  -s --scsi\t -f --floppy\n"
+#~ "  -q --tape   -n --noop\t -V --version\n"
+#~ "  -p --proc\n"
+
+#~ msgid "%s: unable to exec /bin/umount of `%s': %s\n"
+#~ msgstr "%s: incapable de faire exec /bin/umount de `%s': %s\n"

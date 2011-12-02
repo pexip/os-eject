@@ -1,0 +1,782 @@
+eject (2.1.5+deb1+cvs20081104-9) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Nepali (Nabin Gautam).  Closes: #614691
+    - Sinhala (Danishka Navin).  Closes: #640758, #640936
+
+  * Program translations:
+    - Danish (Joe Hansen). Closes: #626731
+
+  [ Frank Lichtenheld ]
+  * Debconf translations:
+    - Uyghur (Sahran). Closes: #627010
+  * Bump Standards-Version to 3.9.2 (no changes)
+  * Bump debian/compat to 9
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri, 02 Dec 2011 21:55:35 +0100
+
+eject (2.1.5+deb1+cvs20081104-8) unstable; urgency=low
+
+  * Bump Standards-Version to 3.9.1:
+    - Use kfreebsd-any in Build-Depends
+  * Convert debian/rules to use dh
+  * Apply patch to avoid -X side-effects by Adam Buchbinder.
+    Fixes Ubuntu bug #136971
+  * Import openSUSE patches by Anna Bernáthová:
+    - use CDROM_DRIVE_STATUS in toggle (bnc#374526)
+    - check host_status and driver_status when using SG_IO (bnc#358033)
+  
+  * Program translations:
+    - Slovenian (Andrej Znidarsic). Closes: #603674
+    - Portuguese (Américo Monteiro). Closes: #567898
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat, 19 Feb 2011 19:47:14 +0100
+
+eject (2.1.5+deb1+cvs20081104-7.1) unstable; urgency=low
+
+  * Non-maintainer upload to fix pending debconf translations
+    (Debian Installer menu entries)
+  * Debconf translations:
+    - Simplified Chinese (Ming Hua).
+    - Persian (Vahid Ghaderi).  Closes: #587021
+    - Kazakh (Sarsenov D.).  Closes: #587101
+    - Bosnian (Armin Beširović).  Closes: #587101
+    - Icelandic (Sveinn í Felli).
+    - Serbian (Janos Guljas).  Closes: #600140
+    - Greek (Kostas Papadimas).  Closes: #604450
+    - Italian updated (Milo Casagrande).  Closes: #559505
+
+ -- Christian Perrier <bubulle@debian.org>  Sun, 19 Dec 2010 09:13:58 +0100
+
+eject (2.1.5+deb1+cvs20081104-7) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Bengali added.
+    - Telugu (Veeven) added.  Closes: #544043
+
+  [ Frank Lichtenheld ]
+  * Bump Standards-Version to 3.8.2 (no changes)
+
+  * Program translations:
+    - Italian updated. Closes: #534349
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 26 Oct 2009 17:43:50 +0100
+
+eject (2.1.5+deb1+cvs20081104-6) unstable; urgency=low
+
+  * Only try to open the device read/write if not root.
+    (Partly addresses #522859)
+
+  * Bump Standards-Version to 3.8.1 (no changes)
+
+  * Program translations:
+    - Swedish updated. Closes: #517512 
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 19 Apr 2009 01:33:10 +0200
+
+eject (2.1.5+deb1+cvs20081104-5) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat, 21 Feb 2009 16:17:28 +0100
+
+eject (2.1.5+deb1+cvs20081104-4) experimental; urgency=low
+
+  * Fix segfault I introduced while merging the patches from
+    upstream CVS. DeMangleMount does not strdup the string
+    anymore, remove one now superfluous free().
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat, 14 Feb 2009 11:27:35 +0100
+
+eject (2.1.5+deb1+cvs20081104-3) experimental; urgency=low
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Asturian added. Closes: #511142
+    - Kazakh added. Closes: #514589
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 09 Feb 2009 21:24:28 +0100
+
+eject (2.1.5+deb1+cvs20081104-2) experimental; urgency=low
+
+  * Fix building on kFreeBSD.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed, 05 Nov 2008 22:53:18 +0100
+
+eject (2.1.5+deb1+cvs20081104-1) experimental; urgency=low
+
+  * Added pending patches from upstream CVS
+  * Added patches from Ubuntu submitted by Martin Pitt:
+    + Fix cdrom speed detection if /proc/sys/dev/cdrom/info references a
+      symlink. LP: #264071, Closes: #504480
+    + Ignore EIO on ioctl(CDROMEJECT) during -T. LP: #91873,
+      Closes: #504478
+  * Fix some typos in Debian changelog. Reported by Paul Menzel.
+    Closes: #501287, #501288
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu, 23 Oct 2008 22:37:51 +0200
+
+eject (2.1.5+deb1-4) unstable; urgency=medium
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Wolof added (sent directly by translator)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed, 01 Oct 2008 14:58:09 +0200
+
+eject (2.1.5+deb1-3) unstable; urgency=medium
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Khmer added (sent directly by translator)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri, 26 Sep 2008 23:36:33 +0200
+
+eject (2.1.5+deb1-2) unstable; urgency=low
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Hindi added (sent directly by the translator)
+    - Marathi added (sent directly by the translator)
+    - Croatian added
+    - Georgian added. Closes: #498419
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat, 13 Sep 2008 18:20:39 +0200
+
+eject (2.1.5+deb1-1) unstable; urgency=low
+
+  * Create new upstream tarball so that we can get rid of
+    these strange named .po files. Closes: #336792, #336810
+  * New git repository online, add Vcs-* fields.
+  * Add Homepage field.
+  * Debconf translations:
+    - Lithuanian added. Closes: #490779
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 20 Jul 2008 23:42:07 +0200
+
+eject (2.1.5-10) unstable; urgency=medium
+
+  * Debconf translations:
+    - Belarusian added. Closes: #488624
+    - Slovak added. Closes: #488892
+  * Bump Standards-Version to 3.8.0.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 07 Jul 2008 00:24:13 +0200
+
+eject (2.1.5-9) unstable; urgency=low
+
+  * Program translations:
+    - Turkish updated. Closes: #482406
+  * Debconf translations:
+    - Turkish added. Closes: #482715
+    - Esperanto added. Closes: #478957
+    (this was added in -8 as a program translation, but
+     is really a debconf translation)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed, 28 May 2008 22:09:22 +0200
+
+eject (2.1.5-8) unstable; urgency=low
+
+  * Don't issue an error message about missing dmcrypt script.
+    This avoids some spurios warnings in d-i. Closes: #470760
+  * Debhelper:
+    - Increase compat level to 6
+    - Use dh_lintian to install override. Needs
+      build-depends debhelper >= 6.0.7.
+  * Debconf translations:
+    - Albanian added. Closes: #480280
+    - Belarusian added. Closes: #480922
+    - Irish added. Closes: #480876
+  * Program translations:
+    - Eperanto added. Closes: #478957
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 12 May 2008 21:05:46 +0200
+
+eject (2.1.5-7) unstable; urgency=low
+
+  * Debconf translations:
+    - Malayalam added. Closes: #456514
+    - Catalan added. Closes: #465525
+    - Taiwanese Chinese added. Closes: #464859
+  * Program translations:
+    - Português/Brasil updated. Closes: #450498
+    - Italian added. Closes: #472098
+  * Bump Standards-Version to 3.7.3 (no changes)
+  * Remove Vcs-* header since the old CVS repository
+    is no more and the converted git repository is
+    broken and needs to be redone.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri, 18 Apr 2008 21:45:37 +0200
+
+eject (2.1.5-6) unstable; urgency=low
+
+  [ Frank Lichtenheld ]
+  * Add homepage to watch file since eject's version on ibiblio
+    is very outdated
+  * Added Vcs-Browser field
+  * Debconf translations:
+    - Korean updated. Closes: #446253
+    - Finnish added. Closes: #448374
+  
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Norwegian Nynorsk added (sent directly by translator).
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 17 Sep 2007 19:15:31 +0200
+
+eject (2.1.5-5) unstable; urgency=low
+
+  * L10n updates only
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Nepali added. Closes: #435341
+    - Korean added. Closes: #437469
+    - Gujarati added. Closes: #438830
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 26 Aug 2007 18:03:28 +0200
+
+eject (2.1.5-4) unstable; urgency=medium
+
+  [ Frank Lichtenheld ]
+  * devmapper is a linux concept and can't be used on kfreebsd:
+    - do not build-depend on libdevmapper-dev
+    - do not try to build the devmapper helper program
+  * since the changes don't affect Debian release archs, use
+    higher urgency to not delay testing migration too long
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Arabic added. Closes: #433052
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon, 23 Jul 2007 22:12:39 +0200
+
+eject (2.1.5-3) unstable; urgency=low
+
+  [ Frank Lichtenheld ]
+  * Finally merge the devmapper patch from Ubuntu.
+    If that will break anything, now seems to be the
+    right time to try it :). Patch mostly by Martin
+    Pitt. Closes: #388350
+  * Some clean-up afterwards:
+    - Add appropriate infos in debian/copyright
+    - Add missing header inclusion in dmcrypt-get-device.c
+    - use CC instead of hardcoded "gcc" in debian/rules
+      (This is probably not enough to ensure things like
+      working cross-compile. But I only want to regenerate
+      the whole auto* stuff if someone actually needs it)
+  * Other clean-up:
+    - Fix lintian warning debian-rules-ignores-make-clean-error
+    - Add lintian override for setuid binary
+  
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Hebrew updated. Closes: #425737
+    - Tamil added. Closes: #430113
+    - Dzongkha added. Closes: #430626
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu, 05 Jul 2007 17:57:00 +0200
+
+eject (2.1.5-2) unstable; urgency=low
+
+  [ Frank Lichtenheld ]
+  * Remove support for Linux kernels older than 2.1. It don't
+    think anyone will miss it and it makes the build process more
+    robust. (For now it works around #423462)
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - Dutch updated. Closes: #424680
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri, 18 May 2007 22:52:02 +0200
+
+eject (2.1.5-1) unstable; urgency=low
+
+  [ Frank Lichtenheld ]
+  * New upstream release (Closes: #394531)
+
+  [ Christian Perrier ]
+  * Debconf translations:
+    - French updated and converted to UTF-8
+    - Thai added. Closes: #422757
+    - Basque added. Closes: #422782
+    - Bulgarian added. Closes: #422816
+    - Czech updated. Closes: #422818
+    - Brazilian Portuguese added. Closes: #422856
+    - Swedish updated. Closes: #422868
+    - Simplified Chinese added. Closes: #423139
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu, 10 May 2007 15:21:29 +0200
+
+eject (2.1.4-4) unstable; urgency=low
+
+  * Multiply installer-menu-item number by 100
+    as requested by Joey Hess (960 -> 96000).
+    (Closes: #418607)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 10 Apr 2007 23:22:32 +0200
+
+eject (2.1.4-3) unstable; urgency=high
+
+  * Acknowledge NMU (Closes: #375536)
+  * Urgency high to give the thing a chance to make it for
+    d-i RC2
+  * debian/po/gl.po: Add translation by Jacobo Tarrio.
+    (Closes: #405402)
+  * po/pt_BR.po, po/cs_CZ.po, po/tr_TR.po: Add new and
+    updated translations from 2.1.5
+  * debian/copyright: Update URL of project homepage.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu, 28 Sep 2006 14:30:45 +0200
+
+eject (2.1.4-2.1) unstable; urgency=low
+
+  * Non-Maintainer Upload
+  * Correct capitalization of field names in templates file (closes: #375536).
+  * Revert priority change for the udeb; it was not the cause of the menu
+    title not being shown.
+
+ -- Frans Pop <fjp@debian.org>  Tue, 11 Jul 2006 23:15:08 +0200
+
+eject (2.1.4-2) unstable; urgency=low
+
+  * debian/po/da.po: Add translation by Claus Hindsgaul.
+    (Closes: #350043)
+  * debian/po/es.po: Add translation by Daniel Franganillo. (#344192)
+  * po/sv_SE.po: Updated translation by Daniel Nylander
+  * po/es_ES.po: Updated translation by Daniel Franganillo.
+    (Closes: #344192)
+  * Increase priority of udeb to standard so that the menu
+    item gets displayed.
+  * Try to open devices for writing, too. Some eject methods seem
+    to require this. Still fallback to read-only opening in case
+    we don't have write access. (Closes: #366408)
+  * Fix handling of mount points with spaces in their name. I solved
+    this but copying quite some code from util-linux. Better solutions
+    welcome...
+  * Bump Standards-Version to 3.7.2 (no changes).
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 11 Dec 2005 23:19:54 +0100
+
+eject (2.1.4-1) unstable; urgency=low
+
+  * New upstream release
+    + Includes complete Debian patch (without po/), yay :)
+    + Sanitized tarball again: removed debian/ and all CVS/ subdirectories,
+      removed .cvsignore and replaced the symlinks again
+  * Fix copyright years in eject.c which I fucked up in my 2.1.3 merge
+    (also fix copyright years in debian/copyright which I forgot to
+    update)
+  * po/de_DE.po: Improved translation
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 11 Dec 2005 16:08:15 +0100
+
+eject (2.1.3-1) unstable; urgency=low
+
+  * New upstream release (Closes: #342479)
+    + I sanitized the tarball: I removed debian/ and autom4te.cache/
+      and replaced the autotools symlinks with the real files 
+  * po/sv_SE.po: Updated translation (2.0.13deb-18) by
+    Daniel Nylander (Closes: #336656)
+  * po/de_DE.po: Updated translation (2.1.3-1) by me
+  * debian/po/pt.po: New translation by Simão Pedro Cardoso
+    (Closes: #336929)
+  * eject.1: Fix some newly introduced hyphen errors
+  * Use debhelper compat level 5 and update build-dependencies
+    accordingly
+  * debian/rules: New upstream release allows more sane CFLAGS handling
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun,  6 Nov 2005 22:34:16 +0100
+
+eject (2.0.13deb-18) unstable; urgency=low
+
+  * Update upstream .pot file and unfuzzy translations where possible.
+    Thanks to Daniel Nylander for noticing.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat,  8 Oct 2005 18:30:30 +0200
+
+eject (2.0.13deb-17) unstable; urgency=low
+
+  * Christopher Martin suggested that it might be a good idea
+    to merge the pmount patch from Ubuntu. I'm still not convinced
+    that this is a particulary good hack but lets do it nevertheless
+    in absence of better ideas. (Closes: #331276)
+  * debian/po/sv.po: Added translation by Daniel Nylander
+    (Closes: #331340)
+  * po/sv_SE.po: Added translation by Daniel Nylander (Closes: #332226)
+  * Reword the Description a bit. Remove long sentence about auto-eject
+    feature and add one about the other uses of eject than CD-ROMs.
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed,  5 Oct 2005 12:31:03 +0200
+
+eject (2.0.13deb-16) unstable; urgency=medium
+
+  * Fix a segfault when unmounting more than one partition of
+    a multi partition device (double regfree). Why has never anyone
+    hit this bug in so many years?
+  * Update FSF Address in debian/copyright
+  * Since I've added me to the copyright statement in eject.c
+    some time ago, make this in debian/copyright, too
+
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 20 Sep 2005 01:34:54 +0200
+
+eject (2.0.13deb-15) unstable; urgency=low
+
+  * Drop -fomit-frame-pointers on m68k since gcc 4.0 produces
+    an ICE with it. Seems to be already fixed in gcc-snapshot
+    so hopefully this is only needed temporarily
+  * Add build dependency to a dpkg-dev which supports
+    DEB_HOST_ARCH_CPU
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu,  8 Sep 2005 17:16:24 +0200
+
+eject (2.0.13deb-14) unstable; urgency=low
+
+  * Apply patch by Robert Millan for GNU/kFreeBSD support
+    (Closes: #324569)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sat, 27 Aug 2005 14:30:51 +0200
+
+eject (2.0.13deb-13) unstable; urgency=low
+
+  * Build with -Os -fomit-frame-pointer on request of
+    Joey Hess (this reduces the size of the binary and
+    thereby of the udeb) (Closes: #314362)
+  * Bump Standards-Version to 3.6.2 (no changes)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri,  1 Jul 2005 17:01:21 +0200
+
+eject (2.0.13deb-12) unstable; urgency=low
+
+  * The Ubuntu translations were partly mangled,
+    clean-up:
+     - debian/po/pl.po: use corrected file
+     - debian/po/{nb,hu}.po: convert back to utf-8
+    Thanks to Colin Watson for the help
+    (again Closes: #303252)
+  * debian/po/vi.po: Added translation by Clytie Siddall
+    (Closes: #311626)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon,  9 May 2005 13:46:07 +0200
+
+eject (2.0.13deb-11) unstable; urgency=low
+
+  * Upload to unstable as d-i development is now
+    in unstable, too.
+  * debian/po/ru.po: Added translation by Basilius
+    (Closes: #300918)
+  * Translations from Ubuntu, provided by Colin Watson:
+    (Closes: #303252)
+    - debian/po/el.po by Kostas Papadimas
+    - debian/po/hu.po by Gabor Burjan
+    - debian/po/id.po by Yoppy Hidayanto
+    - debian/po/nb.po by Terance Edward Sola
+    - debian/po/pl.po by Dominik Zablotny
+    - debian/po/ro.po by Ovidiu Damian
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed, 23 Mar 2005 14:26:32 +0100
+
+eject (2.0.13deb-10) experimental; urgency=low
+
+  * eject.c: don't try to send ioctls to directories or
+    files. If we end up with them (because they exists, but
+    can not be mapped to a device by fstab) we try the next
+    possibility (Closes: #291422)
+  * po/es.po: Added translation of packages' gettext strings
+    by Daniel Franganillo (Closes: #295743)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri,  4 Mar 2005 15:43:47 -0800
+
+eject (2.0.13deb-9) experimental; urgency=low
+
+  * debian/po/it.po: Added translation by Stefano Melchior
+    (Closes: #279014)
+  * volname.1: Document the fact that volname works on normal files, too.
+  * eject.c:
+    + Use newer SG_IO ioctl interface (Closes: #279568)
+    + Unmount by mountpoint, not by device name (Closes: #276657)
+    + Don't try to resolve symlinks when called with -p as
+      /proc/mounts doesn't resolve symlinks either (unlike /etc/mtab)
+    + Ignore errors that occour in ScsiEject at the BLKRRPART
+      ioctl(), there are just too many situations where this isn't
+      a valid action (e.g. when ejecting USB/IEEE1394 storage devices).
+  * README: Fix a typo
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 31 Oct 2004 17:48:07 +0100
+
+eject (2.0.13deb-8sarge2) unstable; urgency=low
+
+  * po/es.po: Added translation of packages' gettext strings
+    by Daniel Franganillo (Closes: #295743)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 27 Feb 2005 00:55:42 +0100
+
+eject (2.0.13deb-8sarge1) unstable; urgency=low
+
+  * debian/po/it.po: Added translation by Stefano Melchior
+    (Closes: #279014)
+  * volname.1: Document the fact that volname works on normal files, too
+  * README: Fix a typo
+
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 25 Jan 2005 16:48:12 +0100
+
+eject (2.0.13deb-8) unstable; urgency=low
+
+  * eject.c: Don't try to eject /cdrom anymore, this location is
+    deprecated (support for /media was already added in -4)
+  * eject.1: Forgot to mention /media at one place in man page
+  * Both changes together should avoid any unexpected and undocumented
+    behaviour (Closes: #271527), thanx to Helge Kreutzmann for
+    alerting me to the problem
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 10 Oct 2004 20:13:29 +0200
+
+eject (2.0.13deb-7) unstable; urgency=low
+
+  * debian/po/cs.po: Added translation by
+    Jan Outrata (Closes: #260378)
+  * debian/control: Add other console based CD-ROM drive control
+    programs to Suggests: cdtool and setcd (Closes: #252372)
+    Thanks to Jari Aalto for the suggestion.
+  
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 20 Jul 2004 21:10:26 +0200
+
+eject (2.0.13deb-6) unstable; urgency=low
+
+  * Acknowledge NMU.
+  * debian/po/ja.po: Added translation by Hideki Yamane
+    (Closes: #251465)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Fri, 28 May 2004 21:15:47 +0200
+
+eject (2.0.13deb-5.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Encode udeb templates in UTF-8 (closes: #251203).
+
+ -- Colin Watson <cjwatson@debian.org>  Thu, 27 May 2004 08:46:48 -0300
+
+eject (2.0.13deb-5) unstable; urgency=low
+
+  * debian/po/fr.po: Added translation by Christian Perrier
+    (Closes: #249238)
+  * debian/po/nl.po: Added translation by Luk Claes
+    (Closes: #250662)
+  * eject.1: Correct minus/hyphens in --no-unmount patch
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 16 May 2004 13:54:32 +0200
+
+eject (2.0.13deb-4) unstable; urgency=low
+
+  * eject.c: 
+    + Add patch by Bastian Kleineidam <calvin@debian.org>
+      to check return values of malloc, regcomp, close and fclose
+      (Closes: #214705)
+    + also try /media/, order is now /dev/, /media/, /mnt/
+    + fix fstab patch that lost the gettextization of a string
+  * eject.1: document /media/ change
+  * po/eject.pot,po/de_DE.po: Update pot files and German translation
+  * debian/watch: add watch file
+  * debian/copyright: remove superfluous colon from upstream URL
+  * debian/po/pt_BR.po: Added translation by Andre Luis Lopes
+    (Closes: #248779)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Thu, 13 May 2004 13:35:37 +0200
+
+eject (2.0.13deb-3) unstable; urgency=low
+
+  * debian/control: Change section of eject-udeb to debian-installer.
+  * eject.1: Fix hyphen vs. minus mistakes.
+  * eject.c, eject.1: Add patch by Bastian Kleineidam <calvin@debian.org>
+    for a new -m, --no-unmount option (Closes: #227348)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 27 Apr 2004 21:37:32 +0200
+
+eject (2.0.13deb-2) unstable; urgency=low
+
+  * debian/rules,debian/control,debhelper/compat: debhelperize
+  * debian/control,debian/rules: add eject-udeb package on
+    request of Sven Luther (Closes: #243166)
+  * debian/rules: install more docs (AUTHORS, NEWS, TODO)
+
+ -- Frank Lichtenheld <djpig@debian.org>  Sun, 11 Apr 2004 21:46:59 +0200
+
+eject (2.0.13deb-1) unstable; urgency=low
+
+  * New orig tarball without debian/ directory
+    to get rid of debian/files and debian/substvars
+  * Also delete debian/dirs as we don't need it, too
+
+ -- Frank Lichtenheld <djpig@debian.org>  Wed, 17 Mar 2004 16:27:40 +0100
+
+eject (2.0.13-5) unstable; urgency=low
+
+  * debian/copyright: Improve the copyright file a lot
+  * eject.c, volname.c: Update the FSF address
+
+ -- Frank Lichtenheld <djpig@debian.org>  Mon,  1 Mar 2004 02:20:47 +0100
+
+eject (2.0.13-4) unstable; urgency=low
+
+  * New maintainer (closes: #227776)
+  * Acknowledge NMU (closes: #214044, #214558)
+  * eject.1: Fix typos in manpage (closes: #221299)
+  * debian/rules: change the /cdrom patch to let
+    eject and volname behave as documented
+     + volname.c: add prefix "/dev/" to DEVICEDEFAULT since
+       the manpage claims that it should do that (closes: #219735)
+     + eject.c: also try "/cdrom" if device is "cdrom" to
+       cover /cdrom (I'm not so convinced about supporting this at
+      all, perhaps I will restore the upstream behaviour)
+  * debian/rules: Clean up. Support DEB_BUILD_OPTS.
+  * debian/control: Bump Standards-Version to 3.6.1
+
+ -- Frank Lichtenheld <djpig@debian.org>  Tue, 20 Jan 2004 22:07:43 +0100
+
+eject (2.0.13-3.1) unstable; urgency=low
+
+  * NMU
+  * Fix gettext build dependency. (closes: #214044)
+  * Add #include <stdlib.h> to volname.c.
+
+ -- Lukas Geyer <lukas@debian.org>  Wed,  8 Oct 2003 02:09:28 -0400
+
+eject (2.0.13-3) unstable; urgency=low
+
+  * Declare gettext build dependency. (closes: #214044)
+
+ -- Martin Mitchell <martin@debian.org>  Sat,  4 Oct 2003 17:57:11 +1000
+
+eject (2.0.13-2) unstable; urgency=low
+
+  * Update to standards version 3.6.1. (closes: #102448)
+  * Enable /cdrom as the default device. (closes: #173419)
+  * Apply patch to install gettext catalog files. (closes: #192829)
+  * Undo NMU breakage and apply patch to skip errors if /etc/fstab
+    is unreadable. Thanks to Lukas Geyer. (closes: #128597,#213359)
+
+ -- Martin Mitchell <martin@debian.org>  Sat,  4 Oct 2003 13:23:07 +1000
+
+eject (2.0.13-1.1) unstable; urgency=low
+
+  * Non-maintainer Upload.
+  * Use /cdrom as the default device. (Closes: #173419)
+  * Only consult /etc/fstab when the information is
+    needed. (Closes: #128597)
+
+ -- Petter Reinholdtsen <pere@debian.org>  Wed, 24 Sep 2003 10:22:14 +0200
+
+eject (2.0.13-1) unstable; urgency=low
+
+  * New upstream release.
+  * Update to standards version 3.5.8.
+
+ -- Martin Mitchell <martin@debian.org>  Mon, 23 Dec 2002 01:30:19 +1100
+
+eject (2.0.12-1) unstable; urgency=low
+
+  * New upstream release. (closes: #155172, #114148)
+  * Update copyright file. (closes: #133493)
+  * Update to standards version 3.5.7.
+
+ -- Martin Mitchell <martin@debian.org>  Sat,  7 Sep 2002 01:13:13 +1000
+
+eject (2.0.3-1) unstable; urgency=low
+
+  * New upstream release, with kernel 2.4 support. (closes: #88379)
+  * Correct manpage syntax. (closes: #90283)
+
+ -- Martin Mitchell <martin@debian.org>  Wed, 25 Apr 2001 12:07:56 +1000
+
+eject (2.0.2-2) unstable; urgency=low
+
+  * Update copyright information.
+  * Update to standards version 3.2.1. (closes: #80747, #82132, #82215)
+  * Patch to ignore commented fstab lines. (closes: #66810)
+  * Test with recent kernels to confirm behavior. (closes: #65755)
+  * Change to section utils. (closes: #74465)
+  * Support multiple symlinks. (closes: #80596)
+
+ -- Martin Mitchell <martin@debian.org>  Sun, 28 Jan 2001 12:55:17 +1100
+
+eject (2.0.2-1) unstable; urgency=low
+
+  * New upstream release. (closes: #34477)
+  * Fix already open behaviour. (closes: #34021)
+  * New code for cd changers. (closes: #18280)
+
+ -- Martin Mitchell <martin@debian.org>  Wed, 17 Mar 1999 00:38:31 +1100
+
+eject (1.5-8) unstable; urgency=low
+
+  * Minor source changes for powerpc compilation.
+
+ -- Martin Mitchell <martin@debian.org>  Thu,  3 Sep 1998 01:56:40 +1000
+
+eject (1.5-7) unstable; urgency=low
+
+  * Fix ejecting for /dev/scd devices. (#22706)
+
+ -- Martin Mitchell <martin@debian.org>  Sun, 14 Jun 1998 17:50:50 +1000
+
+eject (1.5-6) frozen unstable; urgency=low
+
+  * Fix -u option for unmounting before ejecting. (#18234)
+  * Update to standards version 2.4.1.
+
+ -- Martin Mitchell <martin@debian.org>  Tue, 12 May 1998 05:33:40 +1000
+
+eject (1.5-5) unstable; urgency=low
+
+  * Fix -u option when device was mounted as a symlink. (#12078)
+
+ -- Martin Mitchell <martin@debian.org>  Wed, 10 Dec 1997 05:08:42 +1100
+
+eject (1.5-4) unstable; urgency=low
+
+  * Update to standards version 2.3.0.1.
+
+ -- Martin Mitchell <martin@debian.org>  Wed, 26 Nov 1997 17:18:30 +1100
+
+eject (1.5-3) unstable; urgency=low
+
+  * New maintainer.
+
+ -- Martin Mitchell <martin@debian.org>  Wed, 26 Nov 1997 17:05:32 +1100
+
+eject (1.5-2.1) unstable; urgency=low
+
+  * Non-maintainer release.
+  * Libc6 compile.
+
+ -- Martin Mitchell <martin@debian.org>  Sat, 15 Nov 1997 01:56:15 +1100
+
+eject (1.5-2) unstable; urgency=low
+
+  * Change of maintainer
+
+ -- Benedikt Eric Heinen <beh@icemark.ch>  Mon, 9 Jun 1997 06:39:57 +0200
+
+eject (1.5-1) unstable; urgency=low
+
+  * New upstream release
+  * debmake
+
+ -- Christoph Lameter <clameter@debian.org>  Sat, 8 Feb 1997 19:47:17 -0800
+
+eject (1.4-2) unstable; urgency=low
+
+  * Missing newline at the end of debian/control
+
+ -- Christoph Lameter <clameter@debian.org>  Sun, 15 Sep 1996 14:51:46 +0800
+
+eject (1.4-1) unstable; urgency=low
+
+  * Initial Release
+
+ -- Christoph Lameter <clameter@debian.org>  Sun, 15 Sep 1996 14:51:46 +0800
+
+
+ 
