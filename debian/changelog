@@ -1,3 +1,9 @@
+eject (2.1.5+deb1+cvs20081104-9pexip1) pexip; urgency=low
+
+  * Prepare Pexip packaging
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 24 Dec 2013 16:17:19 +0000
+
 eject (2.1.5+deb1+cvs20081104-9) unstable; urgency=low
 
   [ Christian Perrier ]

@@ -2,11 +2,13 @@ Source: eject
 Section: utils
 Priority: optional
 Build-Depends: gettext, debhelper (>= 8.9.0~), autotools-dev, libdevmapper-dev [!kfreebsd-any], libsgutils2-dev
-Maintainer: Frank Lichtenheld <djpig@debian.org>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Frank Lichtenheld <djpig@debian.org>
 Standards-Version: 3.9.2
 Vcs-Git: git://git.debian.org/git/collab-maint/eject.git
 Vcs-Browser: http://git.debian.org/?p=collab-maint/eject.git
 Homepage: http://www.pobox.com/~tranter/eject.html
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: eject
 Architecture: any
